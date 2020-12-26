@@ -11,17 +11,7 @@ const GoalsAchievedProgress = ({progress}: Props) => {
         alignSelf: 'flex-start',
         width: `${progress}%`,
         backgroundColor: "green",}}>
-
         </View>;
 };
-
-const styles = StyleSheet.create({
-    container: {
-        height: 10,
-        alignSelf: 'flex-start',
-        width: '50%',
-        backgroundColor: "green",
-    },
-});
 
 export default GoalsAchievedProgress;

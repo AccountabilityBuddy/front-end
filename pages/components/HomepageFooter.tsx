@@ -25,7 +25,7 @@ import {
     useFonts,
 } from "@expo-google-fonts/poppins";
 
-const HomepageHeader = () => {
+const HomepageFooter = () => {
     let [fontsLoaded] = useFonts({
         Poppins_500Medium,
         Poppins_600SemiBold,
@@ -36,26 +36,47 @@ const HomepageHeader = () => {
     }
 
     return (
-        <View style={styles.header}>
-            <Text style={styles.text}>Accountability Buddy</Text>
-            <GoalsAchievedProgress progress={80} />
+        <View style={styles.footer}>
+            <View style={styles.footerButtons}>
+                <Text style={styles.footerButtonText}>My Goals</Text>
+            </View>
+            <View style={styles.footerButtons}>
+                <Text style={styles.footerButtonText}>Buddies</Text>
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    header: {
-        backgroundColor: "#FFFFFF",
-        height: 110,
-        marginBottom: 30,
+    footer: {
+        backgroundColor: "#F8F9FA",
         alignItems: "center",
         justifyContent: "flex-end",
+        flexDirection: "row",
+    },
+    footerButtons: {
+        height: 50,
+        marginLeft: 25,
+        marginRight: 25,
+        marginTop: 15,
+        marginBottom: 15,
+        padding: 5,
+        borderRadius: 10,
+        backgroundColor: "#DAE0E6",
+        alignItems: "center",
+        justifyContent: "center",
+        flex: 1,
+    },
+    footerButtonText: {
+        fontFamily: "Poppins_500Medium",
+        fontSize: 20,
     },
     text: {
         fontFamily: "Poppins_600SemiBold",
         marginBottom: 10,
+        marginTop: 10,
         fontSize: 25,
     },
 });
 
-export default HomepageHeader;
+export default HomepageFooter;

@@ -1,18 +1,23 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import HomepageHeader from './components/HomepageHeader'
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import HomepageHeader from "./components/HomepageHeader";
+import HomepageFooter from "./components/HomepageFooter";
+import GoalList from "./components/GoalList";
 
 const Homepage = () => {
     return (
-        <HomepageHeader />
-    )
-}
+        <View style={{flex: 1}}>
+            <HomepageHeader />
+            <GoalList />
+            <HomepageFooter />
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#FFFFFF"
-        
-    }
+        backgroundColor: "#FFFFFF",
+    },
 });
 
 export default Homepage;
