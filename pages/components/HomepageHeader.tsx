@@ -1,59 +1,64 @@
-import React, { useEffect } from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import GoalsAchievedProgress from './GoalsAchievedProgress';
-import AppLoading from 'expo-app-loading';
+import React, { useEffect } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import GoalsAchievedProgress from "./GoalsAchievedProgress";
+import GoalList from "./GoalList";
+import AppLoading from "expo-app-loading";
 import { 
-    Montserrat_100Thin,
-    Montserrat_100Thin_Italic,
-    Montserrat_200ExtraLight,
-    Montserrat_200ExtraLight_Italic,
-    Montserrat_300Light,
-    Montserrat_300Light_Italic,
-    Montserrat_400Regular,
-    Montserrat_400Regular_Italic,
-    Montserrat_500Medium,
-    Montserrat_500Medium_Italic,
-    Montserrat_600SemiBold,
-    Montserrat_600SemiBold_Italic,
-    Montserrat_700Bold,
-    Montserrat_700Bold_Italic,
-    Montserrat_800ExtraBold,
-    Montserrat_800ExtraBold_Italic,
-    Montserrat_900Black,
-    Montserrat_900Black_Italic, 
-    useFonts
-  } from '@expo-google-fonts/montserrat'
-import App from '../../App';
+    Poppins_100Thin,
+    Poppins_100Thin_Italic,
+    Poppins_200ExtraLight,
+    Poppins_200ExtraLight_Italic,
+    Poppins_300Light,
+    Poppins_300Light_Italic,
+    Poppins_400Regular,
+    Poppins_400Regular_Italic,
+    Poppins_500Medium,
+    Poppins_500Medium_Italic,
+    Poppins_600SemiBold,
+    Poppins_600SemiBold_Italic,
+    Poppins_700Bold,
+    Poppins_700Bold_Italic,
+    Poppins_800ExtraBold,
+    Poppins_800ExtraBold_Italic,
+    Poppins_900Black,
+    Poppins_900Black_Italic,
+    useFonts,
+  } from '@expo-google-fonts/poppins'
 
 const HomepageHeader = () => {
-
     let [fontsLoaded] = useFonts({
-        Montserrat_500Medium,
+        Poppins_500Medium,
+        Poppins_600SemiBold,
     });
 
-    if(!fontsLoaded) {
-        return <AppLoading />
+    if (!fontsLoaded) {
+        return <AppLoading />;
     }
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>Accountability Buddy</Text>
-            <GoalsAchievedProgress progress={80} />
+        <View>
+            <View style={styles.header}>
+                <Text style={styles.text}>Accountability Buddy</Text>
+                <GoalsAchievedProgress progress={80} />
+            </View>
+            <GoalList />
         </View>
-        
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
-    container: {
+    header: {
         backgroundColor: "#FFFFFF",
         marginTop: 40,
-        alignItems: 'center', 
+        marginBottom: 40,
+        height: 80,
+        alignItems: "center",
+        justifyContent: "center",
     },
     text: {
-        fontFamily: 'Montserrat_500Medium',
-        fontSize: 25
-    }
+        fontFamily: "Poppins_600SemiBold",
+        fontSize: 25,
+    },
 });
 
 export default HomepageHeader;
