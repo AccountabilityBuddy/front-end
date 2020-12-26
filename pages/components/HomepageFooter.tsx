@@ -38,10 +38,20 @@ const HomepageFooter = () => {
     return (
         <View style={styles.footer}>
             <View style={styles.footerButtons}>
-                <Text style={styles.footerButtonText}>My Goals</Text>
+                {/* <Text style={styles.footerButtonText}>+</Text> */}
+                <Image source={require("../../assets/images/user.png")} style={styles.icons}></Image>
             </View>
             <View style={styles.footerButtons}>
-                <Text style={styles.footerButtonText}>Buddies</Text>
+                {/* <Text style={styles.footerButtonText}>+</Text> */}
+                <Image source={require("../../assets/images/plus.png")} style={styles.icons}></Image>
+            </View>
+            <View style={styles.footerButtons}>
+                {/* <Text style={styles.footerButtonText}>+</Text> */}
+                <Image source={require("../../assets/images/plus.png")} style={styles.icons}></Image>
+            </View>
+            <View style={styles.footerButtons}>
+                {/* <Text style={styles.footerButtonText}>+</Text> */}
+                <Image source={require("../../assets/images/plus.png")} style={styles.icons}></Image>
             </View>
         </View>
     );
@@ -55,13 +65,13 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     footerButtons: {
-        height: 50,
+        height: 40,
         marginLeft: 25,
         marginRight: 25,
         marginTop: 15,
         marginBottom: 15,
         padding: 5,
-        borderRadius: 10,
+        borderRadius: 100,
         backgroundColor: "#DAE0E6",
         alignItems: "center",
         justifyContent: "center",
@@ -70,6 +80,10 @@ const styles = StyleSheet.create({
     footerButtonText: {
         fontFamily: "Poppins_500Medium",
         fontSize: 20,
+    },
+    icons: {
+        height: 40,
+        width: 40,
     },
     text: {
         fontFamily: "Poppins_600SemiBold",
