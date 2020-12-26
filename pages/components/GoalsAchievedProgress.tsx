@@ -11,7 +11,6 @@ const GoalsAchievedProgress = ({progress}: Props) => {
         alignSelf: 'flex-start',
         width: `${progress}%`,
         backgroundColor: "green",}}>
-
         </View>;
 };
 
