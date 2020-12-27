@@ -4,7 +4,7 @@ on:
   pull_request: 
     branches: 
       - master
-      
+
 jobs:
   install-and-test:
     runs-on: ubuntu-latest
@@ -23,6 +23,7 @@ jobs:
           npm install
       - name: Build Android Release
         run: |
+          chmod +x ./gradlew
           cd android && ./gradlew assembleRelease
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
