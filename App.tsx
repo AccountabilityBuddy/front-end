@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Homepage from './pages/Homepage'
+import Goal from './pages/components/Goal'
 
 export default function App() {
   return (

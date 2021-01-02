@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import {View} from 'react-native'
 
 type FruitProps = {
     fruitDetector: string;
@@ -12,6 +13,7 @@ export const Buddy: FC<FruitProps> = ({ fruitDetector }) => {
     }
 
     return (
+        <View>
         <form>
             <select
                 onChange={(event) => changeFruit(event.target.value)}
@@ -21,6 +23,7 @@ export const Buddy: FC<FruitProps> = ({ fruitDetector }) => {
                 <option value="Invite People">Invite People</option>
             </select>
         </form>
+        </View>
     )
 }
 
