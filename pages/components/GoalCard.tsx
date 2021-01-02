@@ -24,9 +24,18 @@ import {
 } from "@expo-google-fonts/poppins";
 
 // Add state to determine wheter we have to start now or the task has been already finished.
-// Add props for buddy name, goal name, etc.
 
-const GoalCard = () => {
+type Props = {
+    goalName: String,
+    // startDate: Date,
+    // endDate: Date,
+    // period: String,
+    // stake: String,
+    // durationPerSession: String,
+    buddyName: String,
+}
+
+const GoalCard = ({goalName, buddyName}: Props) => {
     let [fontsLoaded] = useFonts({
         Poppins_500Medium,
     });
@@ -39,7 +48,7 @@ const GoalCard = () => {
         <View style={styles.container}>
             <View style={{flex: 1}}>
                 <View>
-                    <Text style={styles.goalname}>Goal1</Text>
+                    <Text style={styles.goalname}>{goalName}</Text>
                 </View>
                 <View style={styles.button}>
                     <Text style={styles.goalfoot}>Start Now</Text>
@@ -48,7 +57,7 @@ const GoalCard = () => {
             <View style={{flex:1}}>
                 <View style={{backgroundColor: "blue", height: 70, width: 70, alignSelf: "center"}}>
                 </View>
-                <Text style={{textAlign: "center", fontFamily: "Poppins_500Medium"}}>Buddy 1</Text>
+                <Text style={{textAlign: "center", fontFamily: "Poppins_500Medium"}}>{buddyName}</Text>
             </View>
             <View style={{flex:1}}>
                 <View style={{backgroundColor: "blue", height: 70, width: 70, alignSelf: "center"}}>
