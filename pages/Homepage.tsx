@@ -8,7 +8,7 @@ const Homepage = () => {
     return (
         <View style={{flex: 1}}>
             <HomepageHeader />
-            <GoalList userId={5432}/>
+            <GoalList userId={"5ff23f39b539773e946b7380"}/>
             <HomepageFooter />
         </View>
     );
