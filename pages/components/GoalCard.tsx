@@ -26,16 +26,11 @@ import {
 // Add state to determine wheter we have to start now or the task has been already finished.
 
 type Props = {
-    goalName: String,
-    // startDate: Date,
-    // endDate: Date,
-    // period: String,
-    // stake: String,
-    // durationPerSession: String,
-    buddyName: String,
+    key: String,
+    name: String
 }
 
-const GoalCard = ({goalName, buddyName}: Props) => {
+const GoalCard = ({name}: Props) => {
     let [fontsLoaded] = useFonts({
         Poppins_500Medium,
     });
@@ -48,7 +43,7 @@ const GoalCard = ({goalName, buddyName}: Props) => {
         <View style={styles.container}>
             <View style={{flex: 1}}>
                 <View>
-                    <Text style={styles.goalname}>{goalName}</Text>
+                    <Text style={styles.goalname}>{name}</Text>
                 </View>
                 <View style={styles.button}>
                     <Text style={styles.goalfoot}>Start Now</Text>
@@ -57,7 +52,7 @@ const GoalCard = ({goalName, buddyName}: Props) => {
             <View style={{flex:1}}>
                 <View style={{backgroundColor: "blue", height: 70, width: 70, alignSelf: "center"}}>
                 </View>
-                <Text style={{textAlign: "center", fontFamily: "Poppins_500Medium"}}>{buddyName}</Text>
+                <Text style={{textAlign: "center", fontFamily: "Poppins_500Medium"}}>{name}</Text>
             </View>
             <View style={{flex:1}}>
                 <View style={{backgroundColor: "blue", height: 70, width: 70, alignSelf: "center"}}>

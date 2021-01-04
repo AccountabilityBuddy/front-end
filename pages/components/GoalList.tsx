@@ -1,34 +1,54 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { request, gql } from "graphql-request";
+import AppLoading from "expo-app-loading";
 import GoalCard from "./GoalCard";
 
-// make a list of goalcards
-
 type Props = {
-    userId: Number
-}
+   userId: string;
+};
 
-const GoalList = ({userId}: Props) => {
+const GoalList = ({ userId }: Props) => {
+   const [fetchedData, setFetchedData] = useState<Array<{"_id": (string & String), "name": String}>>([]);
+   const [loading, setLoading] = useState(true);
+   let goalCardList:Array<JSX.Element> = []
 
-    useEffect(() => {
-        // add graphQL query to fetch a list of goals based on the given userId
-        // it will return a list of goal IDs, pass them as props to the goal card component
-    });
+   useEffect(() => {
+      const query = gql`
+         query {
+            users(id: "${userId}") {
+               createdGoals {
+                  _id
+                  name
+               }
+            }
+         }
+      `;
 
-    return (
-        <ScrollView>
-            {/* <GoalCard goalName="Gym" buddyName="Bean"/>
-            <GoalCard goalName="Eat Veggies" buddyName="Bob"/>
-            <GoalCard goalName="Read" buddyName="Hank"/>
-            <GoalCard goalName="Gym" buddyName="Bean"/>
-            <GoalCard goalName="Gym" buddyName="Bean"/>
-            <GoalCard goalName="Gym" buddyName="Bean"/>
-            <GoalCard goalName="Gym" buddyName="Bean"/>
-            <GoalCard goalName="Gym" buddyName="Bean"/>
-            <GoalCard goalName="Gym" buddyName="Bean"/>
-            <GoalCard goalName="Gym" buddyName="Bean"/> */}
-        </ScrollView>
-    )
-}
+      request(
+         "https://accountability-buddy-backend.herokuapp.com/graphql?",
+         query
+      ).then((data) => {
+         setFetchedData(data["users"][0]["createdGoals"])
+      });
+      setLoading(false);
+   }, []);
+
+   if(loading) {
+      return (
+         <AppLoading />
+      )
+   }
+
+   for(var i = 0; i < fetchedData.length; i++) {
+      goalCardList.push(<GoalCard key={fetchedData[i]["_id"]} name={fetchedData[i]["name"]} />)
+   }
+   
+   return (
+      <ScrollView>
+         {goalCardList}
+      </ScrollView>
+   );
+};
 
 export default GoalList;
