@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, TextInput, StyleSheet, Button, Alert } from "react-native";
+import { Text, View, TextInput, StyleSheet, Button, Alert} from "react-native";
 import Name from "./Name";
 import Buddy from "./Buddy";
 

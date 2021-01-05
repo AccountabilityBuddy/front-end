@@ -1,30 +1,25 @@
-import React, { FC, useState } from 'react'
-import {View} from 'react-native'
+import React, { useState } from 'react';
+import { Text, StyleSheet, View, TextInput, Button } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
+//NOTE: Need endpoints to make the GraphQL query thing to dynamically add the buddies in the dropdown. Have just left as it is for now. 
 
-type FruitProps = {
-    fruitDetector: string;
-}
-
-export const Buddy: FC<FruitProps> = ({ fruitDetector }) => {
-    const [currentFruit, setCurrentFruit] = useState(fruitDetector)
-
-    const changeFruit = (newFruit: string): void => {
-        setCurrentFruit(newFruit)
-    }
-
+const Buddy = () => {
+    const [currency, setCurrency] = useState(' ');
     return (
-        <View>
-        <form>
-            <select
-                onChange={(event) => changeFruit(event.target.value)}
-                value={currentFruit}
-            >
-                <option value="Public">Public</option>
-                <option value="Invite People">Invite People</option>
-            </select>
-        </form>
+        <View >
+            <View>
+                <Picker
+                    selectedValue={currency}
+                    onValueChange={currentCurrency => setCurrency(currentCurrency)}>
+                    <Picker.Item label="People" value="People" />
+                    <Picker.Item label="Add a Buddy" value="Invite People" />
+                </Picker>
+            </View>
         </View>
-    )
-}
+    );
+};
+const styles = StyleSheet.create({
+    //Check project repo for styles
+});
 
-export default Buddy
+export default Buddy;
