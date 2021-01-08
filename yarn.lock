@@ -6629,6 +6629,11 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-native-countdown-circle-timer@^2.3.10:
+  version "2.3.10"
+  resolved "https://registry.yarnpkg.com/react-native-countdown-circle-timer/-/react-native-countdown-circle-timer-2.3.10.tgz#ce3c1fe86d40808aabc774215510f0c9c7f62b57"
+  integrity sha512-PdFarZV93Ju40X3w55+zWiG2MqBjty3/NqgCwvVTCw4dRi2l6s/S5NvAB7eOAeYgcFvYVeqL7kSIVxZ3LUwzSw==
+
 react-native-custom-dropdown@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-native-custom-dropdown/-/react-native-custom-dropdown-1.0.1.tgz#ee0db5375f8b3bd876f6a842ce4d79497574c3fa"
