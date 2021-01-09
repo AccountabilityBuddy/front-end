@@ -1,31 +1,26 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, TouchableHighlight, View, Image } from "react-native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import RootStackParamList from "../ParamList";
 import GoalsAchievedProgress from "./GoalsAchievedProgress";
 import GoalList from "./GoalList";
 import AppLoading from "expo-app-loading";
 import {
-   Poppins_100Thin,
-   Poppins_100Thin_Italic,
-   Poppins_200ExtraLight,
-   Poppins_200ExtraLight_Italic,
-   Poppins_300Light,
-   Poppins_300Light_Italic,
-   Poppins_400Regular,
-   Poppins_400Regular_Italic,
    Poppins_500Medium,
-   Poppins_500Medium_Italic,
    Poppins_600SemiBold,
-   Poppins_600SemiBold_Italic,
-   Poppins_700Bold,
-   Poppins_700Bold_Italic,
-   Poppins_800ExtraBold,
-   Poppins_800ExtraBold_Italic,
-   Poppins_900Black,
-   Poppins_900Black_Italic,
    useFonts,
 } from "@expo-google-fonts/poppins";
 
-const HomepageFooter = () => {
+type ProfileScreenNavigationProp = StackNavigationProp<
+   RootStackParamList,
+   "Homepage"
+>;
+
+type prop = {
+   navigation: ProfileScreenNavigationProp;
+};
+
+const NavBar = ({ navigation }: prop) => {
    let [fontsLoaded] = useFonts({
       Poppins_500Medium,
       Poppins_600SemiBold,
@@ -45,21 +40,30 @@ const HomepageFooter = () => {
          </View>
          <View style={styles.footerButtons}>
             <Image
-               source={require("../../assets/images/plus.png")}
+               source={require("../../assets/images/contacts.png")}
                style={styles.icons}
             ></Image>
          </View>
          <View style={styles.footerButtons}>
             <Image
-               source={require("../../assets/images/plus.png")}
+               source={require("../../assets/images/data.png")}
                style={styles.icons}
             ></Image>
          </View>
          <View style={styles.footerButtons}>
-            <Image
-               source={require("../../assets/images/plus.png")}
-               style={styles.icons}
-            ></Image>
+            <TouchableHighlight
+               activeOpacity={1}
+               underlayColor="#DDDDDD"
+               style={{
+                  borderRadius: 100,
+               }}
+               onPress={() => navigation.navigate("AddNewGoal")}
+            >
+               <Image
+                  source={require("../../assets/images/plus.png")}
+                  style={styles.icons}
+               ></Image>
+            </TouchableHighlight>
          </View>
       </View>
    );
@@ -80,7 +84,7 @@ const styles = StyleSheet.create({
       marginBottom: 15,
       padding: 5,
       borderRadius: 100,
-      backgroundColor: "#DAE0E6",
+      //backgroundColor: "#DAE0E6",
       alignItems: "center",
       justifyContent: "center",
       flex: 1,
@@ -90,8 +94,8 @@ const styles = StyleSheet.create({
       fontSize: 20,
    },
    icons: {
-      height: 40,
-      width: 40,
+      height: 45,
+      width: 45,
    },
    text: {
       fontFamily: "Poppins_600SemiBold",
@@ -101,4 +105,4 @@ const styles = StyleSheet.create({
    },
 });
 
-export default HomepageFooter;
+export default NavBar;
