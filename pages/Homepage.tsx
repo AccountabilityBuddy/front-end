@@ -17,18 +17,21 @@ type props = {
 
 const Homepage = ({ navigation }: props) => {
    return (
-      <View style={{ flex: 1 }}>
+      <View
+         style={{
+            flex: 1,
+            backgroundColor: "#F9F8F7",
+            paddingLeft: 10,
+            paddingRight: 10,
+         }}
+      >
          <HomepageHeader />
-         <GoalList userId={"5ff23f39b539773e946b7380"} />
-         <NavBar navigation={navigation} />
+         <GoalList
+            navigation={navigation}
+            userId={"5ff23f39b539773e946b7380"}
+         />
       </View>
    );
 };
-
-const styles = StyleSheet.create({
-   container: {
-      backgroundColor: "#FFFFFF",
-   },
-});
 
 export default Homepage;

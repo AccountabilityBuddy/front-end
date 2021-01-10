@@ -1,5 +1,12 @@
 import React from "react";
-import { Text, View, TextInput, StyleSheet, Button, Alert } from "react-native";
+import {
+   ScrollView,
+   View,
+   TextInput,
+   StyleSheet,
+   Button,
+   Alert,
+} from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import RootStackParamList from "./ParamList";
 import Name from "./components/Name";
@@ -17,8 +24,8 @@ type props = {
 
 const Goal = ({ navigation }: props) => {
    return (
-      <View style={styles.container}>
-         <View>
+      <ScrollView>
+         <View style={styles.container}>
             <Name title="Name" />
             <Name title="Start Date" />
             <Name title="End Date" />
@@ -30,7 +37,7 @@ const Goal = ({ navigation }: props) => {
                onPress={() => Alert.alert("Added new goal...")}
             />
          </View>
-      </View>
+      </ScrollView>
    );
 };
 

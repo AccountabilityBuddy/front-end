@@ -1,38 +1,33 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-import AppLoading from "expo-app-loading";
 import {
-   Poppins_100Thin,
-   Poppins_100Thin_Italic,
-   Poppins_200ExtraLight,
-   Poppins_200ExtraLight_Italic,
-   Poppins_300Light,
-   Poppins_300Light_Italic,
-   Poppins_400Regular,
-   Poppins_400Regular_Italic,
-   Poppins_500Medium,
-   Poppins_500Medium_Italic,
-   Poppins_600SemiBold,
-   Poppins_600SemiBold_Italic,
-   Poppins_700Bold,
-   Poppins_700Bold_Italic,
-   Poppins_800ExtraBold,
-   Poppins_800ExtraBold_Italic,
-   Poppins_900Black,
-   Poppins_900Black_Italic,
-   useFonts,
-} from "@expo-google-fonts/poppins";
+   StyleSheet,
+   Text,
+   View,
+   TouchableHighlight,
+   Button,
+} from "react-native";
+import AppLoading from "expo-app-loading";
+import { Ionicons } from "@expo/vector-icons";
+import { StackNavigationProp } from "@react-navigation/stack";
+import RootStackParamList from "../ParamList";
+import { Montserrat_400Regular, useFonts } from "@expo-google-fonts/montserrat";
 
 // Add state to determine wheter we have to start now or the task has been already finished.
 
+type ProfileScreenNavigationProp = StackNavigationProp<
+   RootStackParamList,
+   "Homepage"
+>;
+
 type Props = {
+   navigation: ProfileScreenNavigationProp;
    key: String;
    name: String;
 };
 
-const GoalCard = ({ name }: Props) => {
+const GoalCard = ({ navigation, name }: Props) => {
    let [fontsLoaded] = useFonts({
-      Poppins_500Medium,
+      Montserrat_400Regular,
    });
 
    if (!fontsLoaded) {
@@ -40,41 +35,60 @@ const GoalCard = ({ name }: Props) => {
    }
 
    return (
-      <View style={styles.container}>
-         <View style={{ flex: 1 }}>
-            <View>
-               <Text style={styles.goalname}>{name}</Text>
+      <TouchableHighlight
+         activeOpacity={1}
+         underlayColor="#F9F8F7"
+         onPress={() =>
+            navigation.navigate("GoalDashboard", {
+               goalName: "GoalName",
+            })
+         }
+      >
+         <View style={styles.container}>
+            <View style={{ flex: 1 }}>
+               <View>
+                  <Text style={styles.goalname}>{name}</Text>
+               </View>
+               <TouchableHighlight
+                  activeOpacity={1}
+                  underlayColor="#39AE92"
+                  style={styles.button}
+                  onPress={() => {
+                     navigation.navigate("GoalDashboard", {
+                        goalName: "GoalName",
+                     });
+                  }}
+               >
+                  <Text
+                     style={{
+                        textAlignVertical: "center",
+                        color: "white",
+                     }}
+                  >
+                     Start
+                  </Text>
+               </TouchableHighlight>
             </View>
-            <View style={styles.button}>
-               <Text style={styles.goalfoot}>Start Now</Text>
+            <View style={{ flex: 1 }}>
+               <Ionicons
+                  name={"person-circle"}
+                  size={35}
+                  color={"#F23826"}
+                  style={{
+                     alignSelf: "center",
+                  }}
+               />
+               <Text
+                  style={{
+                     textAlign: "center",
+                     fontFamily: "Montserrat_400Regular",
+                  }}
+               >
+                  {name}
+               </Text>
             </View>
          </View>
-         <View style={{ flex: 1 }}>
-            <View
-               style={{
-                  backgroundColor: "blue",
-                  height: 70,
-                  width: 70,
-                  alignSelf: "center",
-               }}
-            ></View>
-            <Text
-               style={{ textAlign: "center", fontFamily: "Poppins_500Medium" }}
-            >
-               {name}
-            </Text>
-         </View>
-         <View style={{ flex: 1 }}>
-            <View
-               style={{
-                  backgroundColor: "blue",
-                  height: 70,
-                  width: 70,
-                  alignSelf: "center",
-               }}
-            ></View>
-         </View>
-      </View>
+      </TouchableHighlight>
    );
 };
 
@@ -86,22 +100,25 @@ const styles = StyleSheet.create({
       paddingTop: 8,
       paddingBottom: 8,
       paddingLeft: 10,
+      borderRadius: 5,
       width: "100%",
    },
    goalname: {
-      fontFamily: "Poppins_500Medium",
-      fontSize: 25,
+      fontFamily: "Montserrat_400Regular",
+      fontSize: 20,
    },
    goalfoot: {
-      fontFamily: "Poppins_500Medium",
+      // fontFamily: "Poppins_500Medium",
       paddingTop: 4,
    },
    button: {
       height: 30,
-      width: 100,
-      borderRadius: 8,
+      width: 60,
+      borderRadius: 5,
+      marginTop: 5,
+      paddingTop: 4,
       alignItems: "center",
-      backgroundColor: "#00A7E1",
+      backgroundColor: "#3FC2A3",
    },
 });
 
