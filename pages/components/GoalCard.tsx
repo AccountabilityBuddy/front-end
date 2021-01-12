@@ -23,9 +23,11 @@ type Props = {
    navigation: ProfileScreenNavigationProp;
    key: String;
    name: String;
+   buddyName: String;
+   goalPeriod: string;
 };
 
-const GoalCard = ({ navigation, name }: Props) => {
+const GoalCard = ({ navigation, name, buddyName, goalPeriod }: Props) => {
    let [fontsLoaded] = useFonts({
       Montserrat_400Regular,
    });
@@ -40,7 +42,8 @@ const GoalCard = ({ navigation, name }: Props) => {
          underlayColor="#F9F8F7"
          onPress={() =>
             navigation.navigate("GoalDashboard", {
-               goalName: "GoalName",
+               goalName: name,
+               goalPeriod: goalPeriod,
             })
          }
       >
@@ -56,6 +59,7 @@ const GoalCard = ({ navigation, name }: Props) => {
                   onPress={() => {
                      navigation.navigate("GoalDashboard", {
                         goalName: "GoalName",
+                        goalPeriod: goalPeriod,
                      });
                   }}
                >
@@ -84,7 +88,7 @@ const GoalCard = ({ navigation, name }: Props) => {
                      fontFamily: "Montserrat_400Regular",
                   }}
                >
-                  {name}
+                  {buddyName}
                </Text>
             </View>
          </View>

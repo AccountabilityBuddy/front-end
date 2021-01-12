@@ -18,7 +18,12 @@ type Props = {
 
 const GoalList = ({ navigation, userId }: Props) => {
    const [fetchedData, setFetchedData] = useState<
-      Array<{ _id: string & String; name: String }>
+      Array<{
+         _id: string & String;
+         name: String;
+         buddy: { firstName: string; lastName: string };
+         period: string;
+      }>
    >([]);
    const [loading, setLoading] = useState(true);
    let goalCardList: Array<JSX.Element> = [];
@@ -30,6 +35,11 @@ const GoalList = ({ navigation, userId }: Props) => {
                createdGoals {
                   _id
                   name
+                  period
+                  buddy{
+                     firstName
+                     lastName
+                  }
                }
             }
          }
@@ -48,12 +58,20 @@ const GoalList = ({ navigation, userId }: Props) => {
       return <AppLoading />;
    }
 
+   console.log(fetchedData);
+
    for (var i = 0; i < fetchedData.length; i++) {
       goalCardList.push(
          <GoalCard
             navigation={navigation}
             key={fetchedData[i]["_id"]}
             name={fetchedData[i]["name"]}
+            buddyName={
+               fetchedData[i]["buddy"]["firstName"] +
+               " " +
+               fetchedData[i]["buddy"]["lastName"]
+            }
+            goalPeriod={fetchedData[i]["period"]}
          />
       );
    }

@@ -23,9 +23,10 @@ const HomepageNavigator = () => {
             component={GoalDashboard}
             initialParams={{
                goalName: "Goal",
+               goalPeriod: "5",
             }}
             options={{
-               headerTitle: "Add Goal",
+               headerTitle: "Goal Dashboard",
             }}
          />
       </Stack.Navigator>
