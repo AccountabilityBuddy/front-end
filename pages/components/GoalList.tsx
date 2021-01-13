@@ -1,17 +1,32 @@
 import React, { FC, useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { request, gql } from "graphql-request";
+import { StackNavigationProp } from "@react-navigation/stack";
+import RootStackParamList from "../ParamList";
 import AppLoading from "expo-app-loading";
 import GoalCard from "./GoalCard";
 
+type ProfileScreenNavigationProp = StackNavigationProp<
+   RootStackParamList,
+   "Homepage"
+>;
+
 type Props = {
+   navigation: ProfileScreenNavigationProp;
    userId: string;
 };
 
-const GoalList = ({ userId }: Props) => {
-   const [fetchedData, setFetchedData] = useState<Array<{"_id": (string & String), "name": String}>>([]);
+const GoalList = ({ navigation, userId }: Props) => {
+   const [fetchedData, setFetchedData] = useState<
+      Array<{
+         _id: string & String;
+         name: String;
+         buddy: { firstName: string; lastName: string };
+         period: string;
+      }>
+   >([]);
    const [loading, setLoading] = useState(true);
-   let goalCardList:Array<JSX.Element> = []
+   let goalCardList: Array<JSX.Element> = [];
 
    useEffect(() => {
       const query = gql`
@@ -20,6 +35,11 @@ const GoalList = ({ userId }: Props) => {
                createdGoals {
                   _id
                   name
+                  period
+                  buddy{
+                     firstName
+                     lastName
+                  }
                }
             }
          }
@@ -29,26 +49,34 @@ const GoalList = ({ userId }: Props) => {
          "https://accountability-buddy-backend.herokuapp.com/graphql?",
          query
       ).then((data) => {
-         setFetchedData(data["users"][0]["createdGoals"])
+         setFetchedData(data["users"][0]["createdGoals"]);
       });
       setLoading(false);
    }, []);
 
-   if(loading) {
-      return (
-         <AppLoading />
-      )
+   if (loading) {
+      return <AppLoading />;
    }
 
-   for(var i = 0; i < fetchedData.length; i++) {
-      goalCardList.push(<GoalCard key={fetchedData[i]["_id"]} name={fetchedData[i]["name"]} />)
+   console.log(fetchedData);
+
+   for (var i = 0; i < fetchedData.length; i++) {
+      goalCardList.push(
+         <GoalCard
+            navigation={navigation}
+            key={fetchedData[i]["_id"]}
+            name={fetchedData[i]["name"]}
+            buddyName={
+               fetchedData[i]["buddy"]["firstName"] +
+               " " +
+               fetchedData[i]["buddy"]["lastName"]
+            }
+            goalPeriod={fetchedData[i]["period"]}
+         />
+      );
    }
-   
-   return (
-      <ScrollView>
-         {goalCardList}
-      </ScrollView>
-   );
+
+   return <ScrollView>{goalCardList}</ScrollView>;
 };
 
 export default GoalList;

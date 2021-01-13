@@ -1,6 +1,14 @@
-import React from "react";
-import { Text, View, TextInput, StyleSheet, Button, Alert } from "react-native";
+import React, { useState } from "react";
+import {
+   ScrollView,
+   View,
+   TextInput,
+   StyleSheet,
+   Button,
+   Alert,
+} from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { request, gql } from "graphql-request";
 import RootStackParamList from "./ParamList";
 import Name from "./components/Name";
 import Buddy from "./components/Buddy";
@@ -11,26 +19,65 @@ type ProfileScreenNavigationProp = StackNavigationProp<
    "Homepage"
 >;
 
+// Add prop for creator
+
 type props = {
    navigation: ProfileScreenNavigationProp;
 };
 
 const Goal = ({ navigation }: props) => {
+   const [goalName, setGoalName] = useState("");
+   const [startDate, setStartDate] = useState("");
+   const [endDate, setEndDate] = useState("");
+   const [goalPeriod, setGoalPeriod] = useState("");
+   const [goalStake, setGoalStake] = useState("");
+   const [buddy, setBuddy] = useState("");
+
    return (
-      <View style={styles.container}>
-         <View>
-            <Name title="Name" />
-            <Name title="Start Date" />
-            <Name title="End Date" />
-            <Name title="Period" />
-            <Name title="Stake" />
-            <Name title="Buddy" />
+      <ScrollView>
+         <View style={styles.container}>
+            <Name title="Name" setVal={setGoalName} />
+            <Name title="Start Date" setVal={setStartDate} />
+            <Name title="End Date" setVal={setEndDate} />
+            <Name title="Period" setVal={setGoalPeriod} />
+            <Name title="Stake" setVal={setGoalStake} />
+            <Name title="Buddy" setVal={setBuddy} />
             <Button
                title="Add Goal"
-               onPress={() => Alert.alert("Added new goal...")}
+               onPress={() => {
+                  // what's the difference between period and durationPerSession?
+                  console.log(goalName);
+                  if (goalName !== "") {
+                     const query = gql`
+                        mutation {
+                           createGoal(
+                              goalInput: {
+                                 name: "${goalName}"
+                                 stake: "${goalStake}"
+                                 buddy: "5ff240611c85de3270db328e"
+                                 period: "${goalPeriod}"
+                                 creator: "5ffa757c6d1f8f0004a8f6fa"
+                                 durationPerSession: "${goalPeriod}"
+                                 startDate: "2020-12-26T04:59:43.789Z"
+                                 endDate: "2021-12-26T04:59:43.789Z"
+                              }
+                           ) {
+                              name
+                           }
+                        }
+                     `;
+
+                     request(
+                        "https://accountability-buddy-backend.herokuapp.com/graphql?",
+                        query
+                     ).then((data) => {
+                        console.log(data);
+                     });
+                  }
+               }}
             />
          </View>
-      </View>
+      </ScrollView>
    );
 };
 

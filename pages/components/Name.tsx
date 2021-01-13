@@ -3,9 +3,10 @@ import { TextInput, Text, View } from "react-native";
 
 type NameProps = {
    title: string;
+   setVal: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const Name = ({ title }: NameProps) => {
+const Name = ({ title, setVal }: NameProps) => {
    const [value, onChangeText] = React.useState("");
 
    return (
@@ -21,7 +22,10 @@ const Name = ({ title }: NameProps) => {
                paddingLeft: 5,
             }}
             placeholder={`Enter ${title}`}
-            onChangeText={(text) => onChangeText(text)}
+            onChangeText={(text) => {
+               onChangeText(text);
+               setVal(text);
+            }}
             value={value}
          />
       </View>

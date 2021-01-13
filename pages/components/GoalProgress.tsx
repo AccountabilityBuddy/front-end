@@ -9,17 +9,13 @@ type Props = {
    startTimer: Boolean;
 };
 
-const UrgeWithPleasureComponent = ({ timeDuration, startTimer }: Props) => {
+const RoundCountdownTimer = ({ timeDuration, startTimer }: Props) => {
    return (
       <View style={{ alignItems: "center" }}>
          <CountdownCircleTimer
             isPlaying={startTimer}
             duration={timeDuration}
-            colors={[
-               ["#004777", 0.4],
-               ["#F7B801", 0.4],
-               ["#A30000", 0.2],
-            ]}
+            colors={[["#39AE92"]]}
          >
             {({ remainingTime, animatedColor }) => (
                <Animated.Text style={{ color: animatedColor }}>
@@ -31,4 +27,4 @@ const UrgeWithPleasureComponent = ({ timeDuration, startTimer }: Props) => {
    );
 };
 
-export default UrgeWithPleasureComponent;
+export default RoundCountdownTimer;
