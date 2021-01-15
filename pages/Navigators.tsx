@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Homepage from "./Homepage";
 import Goal from "./AddNewGoal";
 import GoalDashboard from "./GoalDashboard";
+import Sessions from "./Sessions";
 
 const Stack = createStackNavigator();
 
@@ -47,4 +48,18 @@ const AddNewGoalNavigator = () => {
    );
 };
 
-export { HomepageNavigator, AddNewGoalNavigator };
+const SessionsNavigator = () => {
+   return (
+      <Stack.Navigator>
+         <Stack.Screen
+            name="Sessions"
+            component={Sessions}
+            options={{
+               headerTitle: "Sessions",
+            }}
+         />
+      </Stack.Navigator>
+   );
+};
+
+export { HomepageNavigator, AddNewGoalNavigator, SessionsNavigator };
