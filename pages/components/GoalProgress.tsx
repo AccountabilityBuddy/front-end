@@ -16,6 +16,10 @@ const RoundCountdownTimer = ({ timeDuration, startTimer }: Props) => {
             isPlaying={startTimer}
             duration={timeDuration}
             colors={[["#39AE92"]]}
+            onComplete={() => {
+               // create a session here (post graphql query)
+               return [false];
+            }}
          >
             {({ remainingTime, animatedColor }) => (
                <Animated.Text style={{ color: animatedColor }}>

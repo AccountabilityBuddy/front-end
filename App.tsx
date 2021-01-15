@@ -7,8 +7,11 @@ import { Ionicons } from "@expo/vector-icons";
 import Homepage from "./pages/Homepage";
 import Goal from "./pages/AddNewGoal";
 import GoalDashboard from "./pages/GoalDashboard";
-import { HomepageNavigator, AddNewGoalNavigator } from "./pages/Navigators";
-import { HeaderTitle } from "@react-navigation/stack";
+import {
+   HomepageNavigator,
+   AddNewGoalNavigator,
+   SessionsNavigator,
+} from "./pages/Navigators";
 
 const Tab = createBottomTabNavigator();
 
@@ -66,9 +69,9 @@ export default function App() {
             />
             <Tab.Screen
                name="Data"
-               component={Goal}
+               component={SessionsNavigator}
                options={{
-                  title: "Data",
+                  title: "Sessions",
                }}
             />
             <Tab.Screen
