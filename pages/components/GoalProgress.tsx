@@ -2,14 +2,26 @@
 import React from "react";
 import { View } from "react-native";
 import { Animated } from "react-native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import RootStackParamList from "../ParamList";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 
+type ProfileScreenNavigationProp = StackNavigationProp<
+   RootStackParamList,
+   "GoalDashboard"
+>;
+
 type Props = {
+   navigation: ProfileScreenNavigationProp;
    timeDuration: Number;
    startTimer: Boolean;
 };
 
-const RoundCountdownTimer = ({ timeDuration, startTimer }: Props) => {
+const RoundCountdownTimer = ({
+   navigation,
+   timeDuration,
+   startTimer,
+}: Props) => {
    return (
       <View style={{ alignItems: "center" }}>
          <CountdownCircleTimer
@@ -18,7 +30,7 @@ const RoundCountdownTimer = ({ timeDuration, startTimer }: Props) => {
             colors={[["#39AE92"]]}
             onComplete={() => {
                // create a session here (post graphql query)
-               return [false];
+               navigation.navigate("BuddyView");
             }}
          >
             {({ remainingTime, animatedColor }) => (

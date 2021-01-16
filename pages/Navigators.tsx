@@ -6,6 +6,7 @@ import Homepage from "./Homepage";
 import Goal from "./AddNewGoal";
 import GoalDashboard from "./GoalDashboard";
 import Sessions from "./Sessions";
+import BuddyView from "./BuddyView";
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,17 @@ const HomepageNavigator = () => {
             component={GoalDashboard}
             initialParams={{
                goalName: "Goal",
+               goalPeriod: "5",
+            }}
+            options={{
+               headerTitle: "Goal Dashboard",
+            }}
+         />
+         <Stack.Screen
+            name="BuddyView"
+            component={BuddyView}
+            initialParams={{
+               goalName: "Share Progress",
                goalPeriod: "5",
             }}
             options={{

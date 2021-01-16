@@ -43,6 +43,7 @@ const GoalDashboard = ({ navigation, route }: props) => {
 
          {/* Possibly add some way to save timer state when the pages change, the timer currently resets */}
          <RoundCountdownTimer
+            navigation={navigation}
             timeDuration={parseInt(route.params.goalPeriod) * 60}
             startTimer={timerState}
          />
