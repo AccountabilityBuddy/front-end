@@ -3,13 +3,18 @@ import {
    Button,
    StyleSheet,
    Text,
+   ScrollView,
    View,
    TouchableHighlight,
 } from "react-native";
+import { Calendar, CalendarList, Agenda } from "react-native-calendars";
 import { StackNavigationProp } from "@react-navigation/stack";
 import RootStackParamList from "./ParamList";
 import RoundCountdownTimer from "./components/GoalProgress";
 import GoalDashboardHeader from "./components/GoalDashboardHeader";
+import GoalCalendar from "./components/GoalCalendar";
+import GoalDashboardInfo from "./components/GoalDashboardInfo";
+import { BaseRouter } from "@react-navigation/native";
 
 type ProfileScreenNavigationProp = StackNavigationProp<
    RootStackParamList,
@@ -27,44 +32,29 @@ const GoalDashboard = ({ navigation, route }: props) => {
    useEffect(() => {
       navigation.setOptions({ headerTitle: `${route.params.goalName}` });
    }, []);
-   const [timerState, setTimerState] = useState(false);
    return (
-      <View
+      <ScrollView
          style={{
-            flex: 0.85,
-            justifyContent: "center",
-            alignItems: "center",
+            marginLeft: 5,
+            marginRight: 5,
          }}
       >
-         {/* Probably add a calendar widget into GoalDashboardHeader showning green on days the goal was accomplished
-         and red on days the goal was missed 
-         Could also add a picture and name of the buddy*/}
-         <GoalDashboardHeader goalName={route.params.goalName} />
-
-         {/* Possibly add some way to save timer state when the pages change, the timer currently resets */}
-         <RoundCountdownTimer
-            navigation={navigation}
-            timeDuration={parseInt(route.params.goalPeriod) * 60}
-            startTimer={timerState}
+         <GoalCalendar />
+         <GoalDashboardInfo
+            startDate={route.params.goalStartDate}
+            endDate={route.params.goalEndDate}
+            buddyName={route.params.buddyName}
          />
-         <View style={{ flexDirection: "row", marginTop: 30 }}>
+         <View>
             <TouchableHighlight
                activeOpacity={1}
-               underlayColor="#537EBC"
-               style={{
-                  height: 30,
-                  flex: 1,
-                  marginLeft: 25,
-                  marginRight: 25,
-                  width: 60,
-                  borderRadius: 5,
-                  marginTop: 5,
-                  paddingTop: 4,
-                  alignItems: "center",
-                  backgroundColor: "#5C8FD7",
-               }}
+               underlayColor="#39AE92"
+               style={styles.button}
                onPress={() => {
-                  setTimerState(true);
+                  navigation.navigate("GoalTimer", {
+                     goalName: route.params.goalName,
+                     goalPeriod: route.params.goalPeriod,
+                  });
                }}
             >
                <Text
@@ -76,38 +66,20 @@ const GoalDashboard = ({ navigation, route }: props) => {
                   Start
                </Text>
             </TouchableHighlight>
-            <TouchableHighlight
-               activeOpacity={1}
-               underlayColor="#C93223"
-               style={{
-                  height: 30,
-                  flex: 1,
-                  marginLeft: 25,
-                  marginRight: 25,
-                  width: 60,
-                  borderRadius: 5,
-                  marginTop: 5,
-                  paddingTop: 4,
-                  alignItems: "center",
-                  backgroundColor: "#F23826",
-               }}
-               onPress={() => {
-                  setTimerState(false);
-               }}
-            >
-               <Text
-                  style={{
-                     textAlignVertical: "center",
-                     color: "white",
-                  }}
-               >
-                  Stop
-               </Text>
-            </TouchableHighlight>
          </View>
-         {/* Add start, stop, reset and delete buttons */}
-      </View>
+      </ScrollView>
    );
 };
+
+const styles = StyleSheet.create({
+   button: {
+      height: 30,
+      borderRadius: 5,
+      marginTop: 5,
+      paddingTop: 4,
+      alignItems: "center",
+      backgroundColor: "#3FC2A3",
+   },
+});
 
 export default GoalDashboard;

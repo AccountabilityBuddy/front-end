@@ -1,7 +1,15 @@
 type RootStackParamList = {
    Homepage: undefined;
    AddNewGoal: undefined;
-   GoalDashboard: { goalName: String; goalPeriod: string };
+   GoalTimer: { goalName: String; goalPeriod: string };
+   GoalDashboard: {
+      goalName: String;
+      goalPeriod: string;
+      goalID: String;
+      goalStartDate: String;
+      goalEndDate: String;
+      buddyName: string | String;
+   };
 };
 
 export default RootStackParamList;
