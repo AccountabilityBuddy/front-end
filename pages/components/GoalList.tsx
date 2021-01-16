@@ -23,6 +23,8 @@ const GoalList = ({ navigation, userId }: Props) => {
          name: String;
          buddy: { firstName: string; lastName: string };
          period: string;
+         startDate: string;
+         endDate: string;
       }>
    >([]);
    const [loading, setLoading] = useState(true);
@@ -36,6 +38,8 @@ const GoalList = ({ navigation, userId }: Props) => {
                   _id
                   name
                   period
+                  startDate
+                  endDate
                   buddy{
                      firstName
                      lastName
@@ -66,6 +70,9 @@ const GoalList = ({ navigation, userId }: Props) => {
             navigation={navigation}
             key={fetchedData[i]["_id"]}
             name={fetchedData[i]["name"]}
+            id={fetchedData[i]["_id"]}
+            startDate={fetchedData[i]["startDate"]}
+            endDate={fetchedData[i]["endDate"]}
             buddyName={
                fetchedData[i]["buddy"]["firstName"] +
                " " +

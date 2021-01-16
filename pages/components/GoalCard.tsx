@@ -22,12 +22,23 @@ type ProfileScreenNavigationProp = StackNavigationProp<
 type Props = {
    navigation: ProfileScreenNavigationProp;
    key: String;
+   id: String;
+   startDate: String;
+   endDate: String;
    name: String;
    buddyName: String;
    goalPeriod: string;
 };
 
-const GoalCard = ({ navigation, name, buddyName, goalPeriod }: Props) => {
+const GoalCard = ({
+   id,
+   startDate,
+   endDate,
+   navigation,
+   name,
+   buddyName,
+   goalPeriod,
+}: Props) => {
    let [fontsLoaded] = useFonts({
       Montserrat_400Regular,
    });
@@ -44,6 +55,10 @@ const GoalCard = ({ navigation, name, buddyName, goalPeriod }: Props) => {
             navigation.navigate("GoalDashboard", {
                goalName: name,
                goalPeriod: goalPeriod,
+               buddyName: buddyName,
+               goalID: id,
+               goalStartDate: startDate,
+               goalEndDate: endDate,
             })
          }
       >
@@ -57,8 +72,8 @@ const GoalCard = ({ navigation, name, buddyName, goalPeriod }: Props) => {
                   underlayColor="#39AE92"
                   style={styles.button}
                   onPress={() => {
-                     navigation.navigate("GoalDashboard", {
-                        goalName: "GoalName",
+                     navigation.navigate("GoalTimer", {
+                        goalName: name,
                         goalPeriod: goalPeriod,
                      });
                   }}

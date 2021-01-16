@@ -7,6 +7,7 @@ import Goal from "./AddNewGoal";
 import GoalDashboard from "./GoalDashboard";
 import Sessions from "./Sessions";
 import BuddyView from "./BuddyView";
+import GoalTimer from "./GoalTimer";
 
 const Stack = createStackNavigator();
 
@@ -29,6 +30,17 @@ const HomepageNavigator = () => {
             }}
             options={{
                headerTitle: "Goal Dashboard",
+            }}
+         />
+         <Stack.Screen
+            name="GoalTimer"
+            component={GoalTimer}
+            initialParams={{
+               goalName: "Goal",
+               goalPeriod: "5",
+            }}
+            options={{
+               headerTitle: "Goal Timer",
             }}
          />
          <Stack.Screen
