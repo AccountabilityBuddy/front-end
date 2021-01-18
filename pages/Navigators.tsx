@@ -46,10 +46,7 @@ const HomepageNavigator = () => {
          <Stack.Screen
             name="BuddyView"
             component={BuddyView}
-            initialParams={{
-               goalName: "Share Progress",
-               goalPeriod: "5",
-            }}
+            initialParams={{}}
             options={{
                headerTitle: "Goal Dashboard",
             }}

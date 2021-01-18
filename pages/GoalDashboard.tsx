@@ -52,6 +52,7 @@ const GoalDashboard = ({ navigation, route }: props) => {
                style={styles.button}
                onPress={() => {
                   navigation.navigate("GoalTimer", {
+                     goalId: route.params.goalID,
                      goalName: route.params.goalName,
                      goalPeriod: route.params.goalPeriod,
                   });

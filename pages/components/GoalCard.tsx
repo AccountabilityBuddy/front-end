@@ -73,6 +73,7 @@ const GoalCard = ({
                   style={styles.button}
                   onPress={() => {
                      navigation.navigate("GoalTimer", {
+                        goalId: id,
                         goalName: name,
                         goalPeriod: goalPeriod,
                      });
