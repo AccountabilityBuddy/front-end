@@ -16,6 +16,8 @@ import GoalCalendar from "./components/GoalCalendar";
 import GoalDashboardInfo from "./components/GoalDashboardInfo";
 import { BaseRouter } from "@react-navigation/native";
 
+const timestamp = require("unix-timestamp");
+
 type ProfileScreenNavigationProp = StackNavigationProp<
    RootStackParamList,
    "GoalDashboard"
@@ -41,8 +43,16 @@ const GoalDashboard = ({ navigation, route }: props) => {
       >
          <GoalCalendar />
          <GoalDashboardInfo
-            startDate={route.params.goalStartDate}
-            endDate={route.params.goalEndDate}
+            startDate={`${timestamp.toDate(
+               parseInt(route.params.goalStartDate)
+            )}`
+               .split(" ")
+               .slice(0, 3)
+               .join(" ")}
+            endDate={`${timestamp.toDate(parseInt(route.params.goalEndDate))}`
+               .split(" ")
+               .slice(0, 3)
+               .join(" ")}
             buddyName={route.params.buddyName}
          />
          <View>
