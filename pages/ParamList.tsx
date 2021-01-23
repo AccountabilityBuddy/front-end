@@ -11,6 +11,7 @@ type RootStackParamList = {
       buddyName: string | String;
    };
    BuddyView: { goalId: string | String };
+   Sessions: { userId: string };
 };
 
 export default RootStackParamList;

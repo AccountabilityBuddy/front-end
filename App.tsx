@@ -62,14 +62,14 @@ export default function App() {
          >
             <Tab.Screen
                name="Homepage"
-               component={HomepageNavigator}
+               children={() => <HomepageNavigator />}
                options={{
                   title: "Home",
                }}
             />
             <Tab.Screen
                name="Data"
-               component={SessionsNavigator}
+               children={() => <SessionsNavigator />}
                options={{
                   title: "Sessions",
                }}

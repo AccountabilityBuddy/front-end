@@ -54,9 +54,9 @@ const Goal = ({ navigation }: props) => {
                               goalInput: {
                                  name: "${goalName}"
                                  stake: "${goalStake}"
-                                 buddy: "5ff240611c85de3270db328e"
+                                 buddy: "5ffa75516d1f8f0004a8f6f8"
                                  period: "${goalPeriod}"
-                                 creator: "5ffa757c6d1f8f0004a8f6fa"
+                                 creator: "5ffa75516d1f8f0004a8f6f8"
                                  durationPerSession: "${goalPeriod}"
                                  startDate: "2020-12-26T04:59:43.789Z"
                                  endDate: "2021-12-26T04:59:43.789Z"

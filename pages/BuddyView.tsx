@@ -53,8 +53,6 @@ const BuddyView = ({ navigation, route }: Props) => {
          quality: 1,
       });
 
-      console.log(result);
-
       if (!result.cancelled) {
          setImage(result.uri);
       }
@@ -62,7 +60,6 @@ const BuddyView = ({ navigation, route }: Props) => {
 
    const sendSession = async () => {
       let date = new Date();
-      console.log(date.toLocaleString());
       const query = gql`
          mutation {
             createSession(
@@ -82,12 +79,8 @@ const BuddyView = ({ navigation, route }: Props) => {
       request(
          "https://accountability-buddy-backend.herokuapp.com/graphql?",
          query
-      ).then((data) => {
-         console.log("data YOOOO" + data);
-      });
+      ).then((data) => {});
    };
-
-   console.log(route.params.goalId);
 
    return (
       <ScrollView

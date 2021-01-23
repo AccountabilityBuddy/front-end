@@ -1,22 +1,14 @@
-import React, { FC, useEffect, useState } from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ScrollView } from "react-native";
 import { request, gql } from "graphql-request";
-import { StackNavigationProp } from "@react-navigation/stack";
-import RootStackParamList from "../ParamList";
 import AppLoading from "expo-app-loading";
 import GoalCard from "./GoalCard";
 
-type ProfileScreenNavigationProp = StackNavigationProp<
-   RootStackParamList,
-   "Homepage"
->;
-
 type Props = {
-   navigation: ProfileScreenNavigationProp;
    userId: string;
 };
 
-const GoalList = ({ navigation, userId }: Props) => {
+const GoalList = ({ userId }: Props) => {
    const [fetchedData, setFetchedData] = useState<
       Array<{
          _id: string & String;
@@ -62,12 +54,9 @@ const GoalList = ({ navigation, userId }: Props) => {
       return <AppLoading />;
    }
 
-   console.log(fetchedData);
-
    for (var i = 0; i < fetchedData.length; i++) {
       goalCardList.push(
          <GoalCard
-            navigation={navigation}
             key={fetchedData[i]["_id"]}
             name={fetchedData[i]["name"]}
             id={fetchedData[i]["_id"]}
