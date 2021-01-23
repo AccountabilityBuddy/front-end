@@ -12,9 +12,21 @@ import {
    TouchableHighlight,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import Constants from "expo-constants";
+import { request, gql } from "graphql-request";
+import { StackNavigationProp } from "@react-navigation/stack";
+import RootStackParamList from "../ParamList";
 
-const BuddyView = () => {
+type ProfileScreenNavigationProp = StackNavigationProp<
+   RootStackParamList,
+   "GoalDashboard"
+>;
+
+type Props = {
+   navigation: ProfileScreenNavigationProp;
+   route: any;
+};
+
+const BuddyView = ({ navigation, route }: Props) => {
    const [image, setImage] = useState(null);
    const [value, onChangeText] = React.useState("");
 
@@ -41,14 +53,34 @@ const BuddyView = () => {
          quality: 1,
       });
 
-      console.log(result);
-
       if (!result.cancelled) {
          setImage(result.uri);
       }
    };
 
-   const sendSession = async () => {};
+   const sendSession = async () => {
+      let date = new Date();
+      const query = gql`
+         mutation {
+            createSession(
+               sessionInput: {
+                  goal: "${route.params.goalId}"
+                  finished: true
+                  imageURL: "temp2"
+                  approved: false
+                  startDateTime: "${date}"
+               }
+            ) {
+               _id
+            }
+         }
+      `;
+
+      request(
+         "https://accountability-buddy-backend.herokuapp.com/graphql?",
+         query
+      ).then((data) => {});
+   };
 
    return (
       <ScrollView

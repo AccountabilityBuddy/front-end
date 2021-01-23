@@ -15,22 +15,24 @@ type Props = {
    navigation: ProfileScreenNavigationProp;
    timeDuration: Number;
    startTimer: Boolean;
+   goalId: String;
 };
 
 const RoundCountdownTimer = ({
    navigation,
    timeDuration,
    startTimer,
+   goalId,
 }: Props) => {
    return (
       <View style={{ alignItems: "center" }}>
          <CountdownCircleTimer
             isPlaying={startTimer}
-            duration={timeDuration}
+            duration={1}
             colors={[["#39AE92"]]}
             onComplete={() => {
                // create a session here (post graphql query)
-               navigation.navigate("BuddyView");
+               navigation.navigate("BuddyView", { goalId: goalId });
             }}
          >
             {({ remainingTime, animatedColor }) => (

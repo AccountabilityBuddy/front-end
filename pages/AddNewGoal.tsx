@@ -46,7 +46,6 @@ const Goal = ({ navigation }: props) => {
                title="Add Goal"
                onPress={() => {
                   // what's the difference between period and durationPerSession?
-                  console.log(goalName);
                   if (goalName !== "") {
                      const query = gql`
                         mutation {
@@ -54,9 +53,9 @@ const Goal = ({ navigation }: props) => {
                               goalInput: {
                                  name: "${goalName}"
                                  stake: "${goalStake}"
-                                 buddy: "5ff240611c85de3270db328e"
+                                 buddy: "5ffa75516d1f8f0004a8f6f8"
                                  period: "${goalPeriod}"
-                                 creator: "5ffa757c6d1f8f0004a8f6fa"
+                                 creator: "5ffa75516d1f8f0004a8f6f8"
                                  durationPerSession: "${goalPeriod}"
                                  startDate: "2020-12-26T04:59:43.789Z"
                                  endDate: "2021-12-26T04:59:43.789Z"
@@ -70,9 +69,7 @@ const Goal = ({ navigation }: props) => {
                      request(
                         "https://accountability-buddy-backend.herokuapp.com/graphql?",
                         query
-                     ).then((data) => {
-                        console.log(data);
-                     });
+                     ).then((data) => {});
                   }
                }}
             />

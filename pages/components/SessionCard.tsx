@@ -4,29 +4,19 @@ import AppLoading from "expo-app-loading";
 import { Ionicons } from "@expo/vector-icons";
 import { Montserrat_400Regular, useFonts } from "@expo-google-fonts/montserrat";
 import { useNavigation } from "@react-navigation/native";
+const timestamp = require("unix-timestamp");
 
 // Add state to determine wheter we have to start now or the task has been already finished.
 
 type Props = {
-   key: String;
-   id: String;
-   startDate: String;
-   endDate: String;
-   name: String;
-   buddyName: String;
-   goalPeriod: string;
-   sessions: Array<string>;
+   key: string;
+   name: string;
+   buddyName: string;
+   approved: boolean;
+   startDateTime: string;
 };
 
-const GoalCard = ({
-   id,
-   startDate,
-   endDate,
-   name,
-   buddyName,
-   goalPeriod,
-   sessions,
-}: Props) => {
+const SessionCard = ({ name, buddyName, approved, startDateTime }: Props) => {
    const navigation = useNavigation();
 
    let [fontsLoaded] = useFonts({
@@ -41,44 +31,28 @@ const GoalCard = ({
       <TouchableHighlight
          activeOpacity={1}
          underlayColor="#F9F8F7"
-         onPress={() =>
-            navigation.navigate("GoalDashboard", {
-               goalName: name,
-               goalPeriod: goalPeriod,
-               buddyName: buddyName,
-               goalID: id,
-               goalStartDate: startDate,
-               goalEndDate: endDate,
-               sessions: sessions,
-            })
-         }
+         onPress={() => {}}
       >
          <View style={styles.container}>
             <View style={{ flex: 1 }}>
                <View>
                   <Text style={styles.goalname}>{name}</Text>
                </View>
-               <TouchableHighlight
-                  activeOpacity={1}
-                  underlayColor="#39AE92"
-                  style={styles.button}
-                  onPress={() => {
-                     navigation.navigate("GoalTimer", {
-                        goalId: id,
-                        goalName: name,
-                        goalPeriod: goalPeriod,
-                     });
-                  }}
-               >
+               <View style={styles.button}>
                   <Text
                      style={{
-                        textAlignVertical: "center",
-                        color: "white",
+                        marginLeft: 8,
+                        color: "black",
                      }}
                   >
-                     Start
+                     {`${timestamp.toDate(
+                        parseInt(startDateTime.slice(0, -3))
+                     )}`
+                        .split(" ")
+                        .slice(0, 3)
+                        .join(" ")}
                   </Text>
-               </TouchableHighlight>
+               </View>
             </View>
             <View style={{ flex: 1 }}>
                <Ionicons
@@ -124,13 +98,13 @@ const styles = StyleSheet.create({
    },
    button: {
       height: 30,
-      width: 60,
+      width: 140,
       borderRadius: 5,
       marginTop: 5,
       paddingTop: 4,
-      alignItems: "center",
-      backgroundColor: "#3FC2A3",
+      alignItems: "flex-start",
+      backgroundColor: "#EAEAEA",
    },
 });
 
-export default GoalCard;
+export default SessionCard;

@@ -1,7 +1,7 @@
 type RootStackParamList = {
    Homepage: undefined;
    AddNewGoal: undefined;
-   GoalTimer: { goalName: String; goalPeriod: string };
+   GoalTimer: { goalName: String; goalPeriod: string; goalId: String | string };
    GoalDashboard: {
       goalName: String;
       goalPeriod: string;
@@ -9,7 +9,10 @@ type RootStackParamList = {
       goalStartDate: String;
       goalEndDate: String;
       buddyName: string | String;
+      sessions: Array<string>;
    };
+   BuddyView: { goalId: string | String };
+   Sessions: { userId: string };
 };
 
 export default RootStackParamList;

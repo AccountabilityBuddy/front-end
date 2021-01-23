@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
@@ -16,81 +16,92 @@ import {
 const Tab = createBottomTabNavigator();
 
 export default function App() {
-   return (
-      <NavigationContainer>
-         <Tab.Navigator
-            screenOptions={({ route }) => ({
-               tabBarIcon: ({ focused, color, size }) => {
-                  let iconName:
-                     | "home"
-                     | "home-outline"
-                     | "add-circle"
-                     | "add-circle-outline"
-                     | "people-outline"
-                     | "people-sharp"
-                     | "bar-chart-outline"
-                     | "bar-chart";
+   const [loggedIn, setLoggedIn] = useState(true);
+   const [email, setEmail] = useState("");
+   const [password, setPassword] = useState("");
+   if (loggedIn) {
+      return (
+         <NavigationContainer>
+            <Tab.Navigator
+               screenOptions={({ route }) => ({
+                  tabBarIcon: ({ focused, color, size }) => {
+                     let iconName:
+                        | "home"
+                        | "home-outline"
+                        | "add-circle"
+                        | "add-circle-outline"
+                        | "people-outline"
+                        | "people-sharp"
+                        | "bar-chart-outline"
+                        | "bar-chart";
 
-                  iconName = "home";
+                     iconName = "home";
 
-                  if (route.name === "Homepage") {
-                     iconName = focused ? "home" : "home-outline";
-                  } else if (route.name === "AddNewGoal") {
-                     iconName = focused ? "add-circle" : "add-circle-outline";
-                  } else if (route.name === "Data") {
-                     iconName = focused ? "bar-chart" : "bar-chart-outline";
-                  } else if (route.name === "Buddies") {
-                     iconName = focused ? "people-sharp" : "people-outline";
-                  }
+                     if (route.name === "Homepage") {
+                        iconName = focused ? "home" : "home-outline";
+                     } else if (route.name === "AddNewGoal") {
+                        iconName = focused
+                           ? "add-circle"
+                           : "add-circle-outline";
+                     } else if (route.name === "Data") {
+                        iconName = focused ? "bar-chart" : "bar-chart-outline";
+                     } else if (route.name === "Buddies") {
+                        iconName = focused ? "people-sharp" : "people-outline";
+                     }
 
-                  // You can return any component that you like here!
-                  return <Ionicons name={iconName} size={size} color={color} />;
-               },
-            })}
-            tabBarOptions={{
-               keyboardHidesTabBar: true,
-               style: {
-                  alignContent: "center",
-                  paddingBottom: 10,
-                  paddingTop: 10,
-                  height: 60,
-               },
-               tabStyle: {},
-               activeTintColor: "#F23826",
-               inactiveTintColor: "#444446",
-            }}
-         >
-            <Tab.Screen
-               name="Homepage"
-               component={HomepageNavigator}
-               options={{
-                  title: "Home",
+                     // You can return any component that you like here!
+                     return (
+                        <Ionicons name={iconName} size={size} color={color} />
+                     );
+                  },
+               })}
+               tabBarOptions={{
+                  keyboardHidesTabBar: true,
+                  style: {
+                     alignContent: "center",
+                     paddingBottom: 10,
+                     paddingTop: 10,
+                     height: 60,
+                  },
+                  tabStyle: {},
+                  activeTintColor: "#F23826",
+                  inactiveTintColor: "#444446",
                }}
-            />
-            <Tab.Screen
-               name="Data"
-               component={SessionsNavigator}
-               options={{
-                  title: "Sessions",
-               }}
-            />
-            <Tab.Screen
-               name="Buddies"
-               component={Goal}
-               options={{
-                  title: "Buddies",
-               }}
-            />
-            <Tab.Screen
-               name="AddNewGoal"
-               component={AddNewGoalNavigator}
-               options={{
-                  title: "Add Goal",
-               }}
-            />
-         </Tab.Navigator>
-      </NavigationContainer>
-   );
+            >
+               <Tab.Screen
+                  name="Homepage"
+                  children={() => <HomepageNavigator />}
+                  options={{
+                     title: "Home",
+                  }}
+               />
+               <Tab.Screen
+                  name="Data"
+                  children={() => <SessionsNavigator />}
+                  options={{
+                     title: "Sessions",
+                  }}
+               />
+               <Tab.Screen
+                  name="Buddies"
+                  component={Goal}
+                  options={{
+                     title: "Buddies",
+                  }}
+               />
+               <Tab.Screen
+                  name="AddNewGoal"
+                  component={AddNewGoalNavigator}
+                  options={{
+                     title: "Add Goal",
+                  }}
+               />
+            </Tab.Navigator>
+         </NavigationContainer>
+      );
+   } else {
+      return <Text>LOGIN</Text>;
+   }
 }
 
 const styles = StyleSheet.create({

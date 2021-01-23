@@ -16,7 +16,7 @@ const HomepageNavigator = () => {
       <Stack.Navigator initialRouteName="Homepage">
          <Stack.Screen
             name="Homepage"
-            component={Homepage}
+            children={() => <Homepage userId="5ffa75516d1f8f0004a8f6f8" />}
             options={{
                headerTitle: "Accountability Buddy",
             }}
@@ -46,10 +46,7 @@ const HomepageNavigator = () => {
          <Stack.Screen
             name="BuddyView"
             component={BuddyView}
-            initialParams={{
-               goalName: "Share Progress",
-               goalPeriod: "5",
-            }}
+            initialParams={{}}
             options={{
                headerTitle: "Goal Dashboard",
             }}
@@ -77,9 +74,9 @@ const SessionsNavigator = () => {
       <Stack.Navigator>
          <Stack.Screen
             name="Sessions"
-            component={Sessions}
+            children={() => <Sessions userId="5ffa75516d1f8f0004a8f6f8" />}
             options={{
-               headerTitle: "Sessions",
+               headerTitle: "Unapproved Sessions",
             }}
          />
       </Stack.Navigator>

@@ -39,10 +39,11 @@ const GoalTimer = ({ navigation, route }: props) => {
          {/* Probably add a calendar widget into GoalDashboardHeader showning green on days the goal was accomplished
          and red on days the goal was missed 
          Could also add a picture and name of the buddy*/}
-         <GoalDashboardHeader goalName={route.params.goalName} />
+         {/* <GoalDashboardHeader goalName={route.params.goalName} /> */}
 
          {/* Possibly add some way to save timer state when the pages change, the timer currently resets */}
          <RoundCountdownTimer
+            goalId={route.params.goalId}
             navigation={navigation}
             timeDuration={parseInt(route.params.goalPeriod) * 60}
             startTimer={timerState}
