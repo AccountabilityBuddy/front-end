@@ -72,12 +72,8 @@ const Sessions = ({ userId }: prop) => {
             return sessionData;
          });
          setFetchedData(unapprovedSessions);
-         //fetchedData.forEach((data) => console.log(data));
-         // console.log(sessionCardList);
       });
    }, []);
-
-   console.log(fetchedData);
 
    for (var i = 0; i < fetchedData.length; i++) {
       let name = fetchedData[i]["name"];

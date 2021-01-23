@@ -46,7 +46,6 @@ const Goal = ({ navigation }: props) => {
                title="Add Goal"
                onPress={() => {
                   // what's the difference between period and durationPerSession?
-                  console.log(goalName);
                   if (goalName !== "") {
                      const query = gql`
                         mutation {
@@ -70,9 +69,7 @@ const Goal = ({ navigation }: props) => {
                      request(
                         "https://accountability-buddy-backend.herokuapp.com/graphql?",
                         query
-                     ).then((data) => {
-                        console.log(data);
-                     });
+                     ).then((data) => {});
                   }
                }}
             />

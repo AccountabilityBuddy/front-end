@@ -15,6 +15,7 @@ type Props = {
    name: String;
    buddyName: String;
    goalPeriod: string;
+   sessions: Array<string>;
 };
 
 const GoalCard = ({
@@ -24,6 +25,7 @@ const GoalCard = ({
    name,
    buddyName,
    goalPeriod,
+   sessions,
 }: Props) => {
    const navigation = useNavigation();
 
@@ -47,6 +49,7 @@ const GoalCard = ({
                goalID: id,
                goalStartDate: startDate,
                goalEndDate: endDate,
+               sessions: sessions,
             })
          }
       >

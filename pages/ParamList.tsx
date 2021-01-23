@@ -9,6 +9,7 @@ type RootStackParamList = {
       goalStartDate: String;
       goalEndDate: String;
       buddyName: string | String;
+      sessions: Array<string>;
    };
    BuddyView: { goalId: string | String };
    Sessions: { userId: string };

@@ -41,7 +41,7 @@ const GoalDashboard = ({ navigation, route }: props) => {
             marginRight: 5,
          }}
       >
-         <GoalCalendar />
+         <GoalCalendar sessions={route.params.sessions} />
          <GoalDashboardInfo
             startDate={`${timestamp.toDate(
                parseInt(route.params.goalStartDate.slice(0, -3))

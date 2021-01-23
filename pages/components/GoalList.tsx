@@ -17,6 +17,9 @@ const GoalList = ({ userId }: Props) => {
          period: string;
          startDate: string;
          endDate: string;
+         sessions: Array<{
+            startDateTime: string;
+         }>;
       }>
    >([]);
    const [loading, setLoading] = useState(true);
@@ -35,6 +38,9 @@ const GoalList = ({ userId }: Props) => {
                   buddy{
                      firstName
                      lastName
+                  }
+                  sessions {
+                     startDateTime
                   }
                }
             }
@@ -68,6 +74,9 @@ const GoalList = ({ userId }: Props) => {
                fetchedData[i]["buddy"]["lastName"]
             }
             goalPeriod={fetchedData[i]["period"]}
+            sessions={fetchedData[i]["sessions"].map(
+               (data) => data["startDateTime"]
+            )}
          />
       );
    }
