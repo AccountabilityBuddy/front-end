@@ -22,16 +22,47 @@ type ProfileScreenNavigationProp = StackNavigationProp<
 // Add prop for creator
 
 type props = {
-   navigation: ProfileScreenNavigationProp;
+   userId: string;
 };
 
-const Goal = ({ navigation }: props) => {
+const goalAddedAlert = (
+   goalName: string,
+   setGoalName: React.Dispatch<React.SetStateAction<string>>,
+   setStartDate: React.Dispatch<React.SetStateAction<string>>,
+   setEndDate: React.Dispatch<React.SetStateAction<string>>,
+   setGoalPeriod: React.Dispatch<React.SetStateAction<string>>,
+   setGoalStake: React.Dispatch<React.SetStateAction<string>>,
+   setBuddy: React.Dispatch<React.SetStateAction<string>>
+) => {
+   Alert.alert(
+      "Goal Added",
+      `The goal ${goalName} has been added!`,
+      [
+         {
+            text: "Done",
+            onPress: () => {
+               setGoalName("");
+               setStartDate("");
+               setEndDate("");
+               setGoalPeriod("");
+               setGoalStake("");
+               setBuddy("");
+            },
+         },
+      ],
+      { cancelable: false }
+   );
+};
+
+const Goal = ({ userId }: props) => {
    const [goalName, setGoalName] = useState("");
    const [startDate, setStartDate] = useState("");
    const [endDate, setEndDate] = useState("");
    const [goalPeriod, setGoalPeriod] = useState("");
    const [goalStake, setGoalStake] = useState("");
    const [buddy, setBuddy] = useState("");
+
+   const _userId = userId.replace(/\s/g, "");
 
    return (
       <ScrollView>
@@ -47,29 +78,41 @@ const Goal = ({ navigation }: props) => {
                onPress={() => {
                   // what's the difference between period and durationPerSession?
                   if (goalName !== "") {
-                     const query = gql`
-                        mutation {
-                           createGoal(
-                              goalInput: {
-                                 name: "${goalName}"
-                                 stake: "${goalStake}"
-                                 buddy: "5ffa75516d1f8f0004a8f6f8"
-                                 period: "${goalPeriod}"
-                                 creator: "5ffa75516d1f8f0004a8f6f8"
-                                 durationPerSession: "${goalPeriod}"
-                                 startDate: "2020-12-26T04:59:43.789Z"
-                                 endDate: "2021-12-26T04:59:43.789Z"
-                              }
-                           ) {
-                              name
-                           }
+                     const queryGetBuddyId = gql`
+                        query {
+                           getIdByEmail(
+                              userEmail: { email: "${buddy}" }
+                           )
                         }
                      `;
 
                      request(
                         "https://accountability-buddy-backend.herokuapp.com/graphql?",
-                        query
-                     ).then((data) => {});
+                        queryGetBuddyId
+                     ).then((data) => {
+                        const query = gql`
+                           mutation {
+                              createGoal(
+                                 goalInput: {
+                                    name: "${goalName}"
+                                    stake: "${goalStake}"
+                                    buddy: "${data["getIdByEmail"]}"
+                                    period: "${goalPeriod}"
+                                    creator: "${_userId}"
+                                    durationPerSession: "${goalPeriod}"
+                                    startDate: "2020-12-26T04:59:43.789Z"
+                                    endDate: "2021-12-26T04:59:43.789Z"
+                                 }
+                              ) {
+                                 name
+                              }
+                           }
+                        `;
+                        request(
+                           "https://accountability-buddy-backend.herokuapp.com/graphql?",
+                           query
+                        ).then((data) => {});
+                     });
                   }
                }}
             />

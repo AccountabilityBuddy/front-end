@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useState } from "react";
 import { View } from "react-native";
 import { Calendar, CalendarList, Agenda } from "react-native-calendars";
@@ -27,7 +26,7 @@ const GoalCalendar = (sessions: props) => {
       )
    );
    console.log(sessionDates);
-   let markedDatesObj = {};
+   let markedDatesObj: { [k: string]: any } = {};
    sessionDates.forEach((dateString: string) => {
       markedDatesObj[dateString] = {
          startingDay: true,
