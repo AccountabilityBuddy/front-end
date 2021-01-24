@@ -7,11 +7,6 @@ import { Ionicons } from "@expo/vector-icons";
 import Homepage from "./pages/Homepage";
 import Goal from "./pages/AddNewGoal";
 import GoalDashboard from "./pages/GoalDashboard";
-import {
-   HomepageNavigator,
-   AddNewGoalNavigator,
-   SessionsNavigator,
-} from "./pages/Navigators";
 import Login from "./pages/Login";
 import LoggedInPage from "./pages/LoggedInPage";
 
@@ -23,7 +18,7 @@ export default function App() {
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    if (loggedIn) {
-      return <LoggedInPage userId={userId} />;
+      return <LoggedInPage userId={userId} setLoggedIn={setLoggedIn} />;
    } else {
       return <Login loggedIn={setLoggedIn} setUserId={setUserId} />;
    }

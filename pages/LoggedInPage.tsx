@@ -9,7 +9,7 @@ import Goal from "./AddNewGoal";
 import GoalDashboard from "./GoalDashboard";
 import {
    HomepageNavigator,
-   AddNewGoalNavigator,
+   ProfileNavigator,
    SessionsNavigator,
    GoalsResponsibleNavigator,
 } from "./Navigators";
@@ -20,9 +20,10 @@ const Tab = createBottomTabNavigator();
 
 type props = {
    userId: string;
+   setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const LoggedInPage = ({ userId }: props) => {
+const LoggedInPage = ({ userId, setLoggedIn }: props) => {
    return (
       <NavigationContainer>
          <Tab.Navigator
@@ -90,7 +91,9 @@ const LoggedInPage = ({ userId }: props) => {
             />
             <Tab.Screen
                name="Profile"
-               children={() => <Profile />}
+               children={() => (
+                  <ProfileNavigator userId={userId} setLoggedIn={setLoggedIn} />
+               )}
                options={{
                   title: "Profile",
                }}
