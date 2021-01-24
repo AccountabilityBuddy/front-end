@@ -111,7 +111,17 @@ const Goal = ({ userId }: props) => {
                         request(
                            "https://accountability-buddy-backend.herokuapp.com/graphql?",
                            query
-                        ).then((data) => {});
+                        ).then((data) => {
+                           goalAddedAlert(
+                              data["name"],
+                              setGoalName,
+                              setStartDate,
+                              setEndDate,
+                              setGoalPeriod,
+                              setGoalStake,
+                              setBuddy
+                           );
+                        });
                      });
                   }
                }}
