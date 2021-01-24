@@ -94,7 +94,7 @@ const Goal = ({ userId, setVal }: props) => {
                      `;
 
                      request(
-                        "https://accountability-buddy-backend.herokuapp.com/graphql?",
+                        "https://accountability-buddy-backend.azurewebsites.net/graphql",
                         queryGetBuddyId
                      ).then((data) => {
                         const query = gql`
@@ -116,7 +116,7 @@ const Goal = ({ userId, setVal }: props) => {
                            }
                         `;
                         request(
-                           "https://accountability-buddy-backend.herokuapp.com/graphql?",
+                           "https://accountability-buddy-backend.azurewebsites.net/graphql",
                            query
                         ).then((data) => {
                            goalAddedAlert(

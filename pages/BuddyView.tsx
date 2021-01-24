@@ -10,6 +10,7 @@ import {
    Text,
    ScrollView,
    TouchableHighlight,
+   Alert,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { request, gql } from "graphql-request";
@@ -68,6 +69,7 @@ const BuddyView = ({ navigation, route }: Props) => {
                   finished: true
                   imageURL: "temp2"
                   approved: false
+                  note: "${value}"
                   startDateTime: "${date}"
                }
             ) {
@@ -77,9 +79,21 @@ const BuddyView = ({ navigation, route }: Props) => {
       `;
 
       request(
-         "https://accountability-buddy-backend.herokuapp.com/graphql?",
+         "https://accountability-buddy-backend.azurewebsites.net/graphql",
          query
       ).then((data) => {});
+
+      Alert.alert(
+         "This session has been successfully sent to your buddy!",
+         "",
+         [
+            {
+               text: "OK",
+               onPress: () => console.log("session sent"),
+            },
+         ],
+         { cancelable: false }
+      );
    };
 
    return (

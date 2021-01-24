@@ -1,10 +1,22 @@
 {
-  "name": "front-end",
-  "displayName": "front-end",
+  "name": "Accountability Buddy",
+  "displayName": "Accountability Buddy",
   "expo": {
     "name": "front-end",
     "slug": "front-end",
     "version": "1.0.0",
+    "icon": "./assets/images/icon.png",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#FFF"
+      }
+    },
     "assetBundlePatterns": [
       "**/*"
     ]

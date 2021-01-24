@@ -14,6 +14,7 @@ import {
    GoalsResponsibleNavigator,
 } from "./Navigators";
 import Login from "./Login";
+import Profile from "./Profile";
 
 const Tab = createBottomTabNavigator();
 
@@ -30,8 +31,8 @@ const LoggedInPage = ({ userId }: props) => {
                   let iconName:
                      | "home"
                      | "home-outline"
-                     | "add-circle"
-                     | "add-circle-outline"
+                     | "person"
+                     | "person-outline"
                      | "people-outline"
                      | "people-sharp"
                      | "bar-chart-outline"
@@ -41,8 +42,8 @@ const LoggedInPage = ({ userId }: props) => {
 
                   if (route.name === "Homepage") {
                      iconName = focused ? "home" : "home-outline";
-                  } else if (route.name === "AddNewGoal") {
-                     iconName = focused ? "add-circle" : "add-circle-outline";
+                  } else if (route.name === "Profile") {
+                     iconName = focused ? "person" : "person-outline";
                   } else if (route.name === "Data") {
                      iconName = focused ? "bar-chart" : "bar-chart-outline";
                   } else if (route.name === "GoalsResponsible") {
@@ -88,10 +89,10 @@ const LoggedInPage = ({ userId }: props) => {
                }}
             />
             <Tab.Screen
-               name="AddNewGoal"
-               children={() => <AddNewGoalNavigator userId={userId} />}
+               name="Profile"
+               children={() => <Profile />}
                options={{
-                  title: "Add Goal",
+                  title: "Profile",
                }}
             />
          </Tab.Navigator>

@@ -54,7 +54,10 @@ const checkAndSignup = (
          }
       }
    `;
-   request("https://accountability-buddy-backend.herokuapp.com/graphql?", query)
+   request(
+      "https://accountability-buddy-backend.azurewebsites.net/graphql",
+      query
+   )
       .then((data) => {
          if (data["createUser"]["_id"]) {
             console.log(data["createUser"]["_id"]);
@@ -88,7 +91,10 @@ const checkAndLogin = (
       }
    `;
 
-   request("https://accountability-buddy-backend.herokuapp.com/graphql?", query)
+   request(
+      "https://accountability-buddy-backend.azurewebsites.net/graphql",
+      query
+   )
       .then((data) => {
          console.log(data["checkPassword"]["_id"]);
          if (data["checkPassword"]["_id"]) {

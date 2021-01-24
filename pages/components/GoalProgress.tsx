@@ -28,7 +28,7 @@ const RoundCountdownTimer = ({
       <View style={{ alignItems: "center" }}>
          <CountdownCircleTimer
             isPlaying={startTimer}
-            duration={1}
+            duration={timeDuration}
             colors={[["#39AE92"]]}
             onComplete={() => {
                // create a session here (post graphql query)
