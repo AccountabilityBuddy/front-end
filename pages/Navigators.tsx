@@ -11,6 +11,7 @@ import GoalTimer from "./GoalTimer";
 import Login from "./Login";
 import LoggedInPage from "./LoggedInPage";
 import GoalsResponsible from "./components/GoalsResponsible";
+import Profile from "./Profile";
 
 const Stack = createStackNavigator();
 
@@ -26,8 +27,9 @@ type goalsResponsibleProps = {
    userId: string;
 };
 
-type addNewGoalProps = {
+type profileProps = {
    userId: string;
+   setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const HomepageNavigator = ({ userId }: homeProps) => {
@@ -85,14 +87,16 @@ const GoalsResponsibleNavigator = ({ userId }: goalsResponsibleProps) => {
    );
 };
 
-const AddNewGoalNavigator = ({ userId }: addNewGoalProps) => {
+const ProfileNavigator = ({ userId, setLoggedIn }: profileProps) => {
    return (
       <Stack.Navigator>
          <Stack.Screen
-            name="Add New Goal"
-            children={() => <GoalsResponsible userId={userId} />}
+            name="Profile"
+            children={() => (
+               <Profile userId={userId} setLoggedIn={setLoggedIn} />
+            )}
             options={{
-               headerTitle: "Add Goal",
+               headerTitle: "Profile",
             }}
          />
       </Stack.Navigator>
@@ -136,7 +140,7 @@ const SessionsNavigator = ({ userId }: sessionProps) => {
 
 export {
    HomepageNavigator,
-   AddNewGoalNavigator,
+   ProfileNavigator,
    GoalsResponsibleNavigator,
    SessionsNavigator,
 };
