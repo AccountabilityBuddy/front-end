@@ -56,7 +56,7 @@ const Sessions = ({ userId }: prop) => {
       `;
 
       request(
-         "https://accountability-buddy-backend.herokuapp.com/graphql?",
+         "https://accountability-buddy-backend.azurewebsites.net/graphql",
          query
       ).then((data) => {
          const createdGoals = data["users"][0]["createdGoals"];

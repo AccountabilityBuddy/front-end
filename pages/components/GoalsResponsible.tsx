@@ -62,7 +62,7 @@ const GoalsResponsible = ({ userId }: props) => {
       `;
 
       request(
-         "https://accountability-buddy-backend.herokuapp.com/graphql?",
+         "https://accountability-buddy-backend.azurewebsites.net/graphql",
          query
       ).then((data) => {
          const goalsResponsible = data["users"][0]["goalsResponsible"];

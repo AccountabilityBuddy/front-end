@@ -79,7 +79,7 @@ const BuddyView = ({ navigation, route }: Props) => {
       `;
 
       request(
-         "https://accountability-buddy-backend.herokuapp.com/graphql?",
+         "https://accountability-buddy-backend.azurewebsites.net/graphql",
          query
       ).then((data) => {});
 
