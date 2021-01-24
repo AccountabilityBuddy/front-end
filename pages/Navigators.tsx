@@ -10,6 +10,7 @@ import BuddyView from "./BuddyView";
 import GoalTimer from "./GoalTimer";
 import Login from "./Login";
 import LoggedInPage from "./LoggedInPage";
+import GoalsResponsible from "./components/GoalsResponsible";
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,10 @@ type homeProps = {
 };
 
 type sessionProps = {
+   userId: string;
+};
+
+type goalsResponsibleProps = {
    userId: string;
 };
 
@@ -69,12 +74,23 @@ const HomepageNavigator = ({ userId }: homeProps) => {
    );
 };
 
+const GoalsResponsibleNavigator = ({ userId }: goalsResponsibleProps) => {
+   return (
+      <Stack.Navigator>
+         <Stack.Screen
+            name="Goals Responsible"
+            children={() => <GoalsResponsible userId={userId} />}
+         />
+      </Stack.Navigator>
+   );
+};
+
 const AddNewGoalNavigator = ({ userId }: addNewGoalProps) => {
    return (
       <Stack.Navigator>
          <Stack.Screen
             name="Add New Goal"
-            children={() => <Goal userId={userId} />}
+            children={() => <GoalsResponsible userId={userId} />}
             options={{
                headerTitle: "Add Goal",
             }}
@@ -118,4 +134,9 @@ const SessionsNavigator = ({ userId }: sessionProps) => {
    );
 };
 
-export { HomepageNavigator, AddNewGoalNavigator, SessionsNavigator };
+export {
+   HomepageNavigator,
+   AddNewGoalNavigator,
+   GoalsResponsibleNavigator,
+   SessionsNavigator,
+};

@@ -14,6 +14,7 @@ import Name from "./components/Name";
 import InputDate from "./components/InputDate";
 import Buddy from "./components/Buddy";
 import NavBar from "./components/NavBar";
+import NameBuddy from "./components/NameBuddy";
 
 type ProfileScreenNavigationProp = StackNavigationProp<
    RootStackParamList,
@@ -24,6 +25,7 @@ type ProfileScreenNavigationProp = StackNavigationProp<
 
 type props = {
    userId: string;
+   setVal: Function;
 };
 
 const goalAddedAlert = (
@@ -55,7 +57,7 @@ const goalAddedAlert = (
    );
 };
 
-const Goal = ({ userId }: props) => {
+const Goal = ({ userId, setVal }: props) => {
    const [goalName, setGoalName] = useState("");
    const [startDate, setStartDate] = useState(new Date());
    const [endDate, setEndDate] = useState(new Date());
@@ -77,7 +79,7 @@ const Goal = ({ userId }: props) => {
             <InputDate title="End Date" date={endDate} setVal={setEndDate} />
             <Name title="Period" setVal={setGoalPeriod} />
             <Name title="Stake" setVal={setGoalStake} />
-            <Name title="Buddy" setVal={setBuddy} />
+            <NameBuddy title="Buddy" setVal={setBuddy} />
             <Button
                title="Add Goal"
                onPress={() => {
@@ -105,8 +107,8 @@ const Goal = ({ userId }: props) => {
                                     period: "${goalPeriod}"
                                     creator: "${_userId}"
                                     durationPerSession: "${goalPeriod}"
-                                    startDate: "2020-12-26T04:59:43.789Z"
-                                    endDate: "2021-12-26T04:59:43.789Z"
+                                    startDate: "${startDate}"
+                                    endDate: "${endDate}"
                                  }
                               ) {
                                  name
@@ -118,7 +120,7 @@ const Goal = ({ userId }: props) => {
                            query
                         ).then((data) => {
                            goalAddedAlert(
-                              data["name"],
+                              goalName,
                               setGoalName,
                               setStartDate,
                               setEndDate,
@@ -126,11 +128,21 @@ const Goal = ({ userId }: props) => {
                               setGoalStake,
                               setBuddy
                            );
+                           setVal();
                         });
                      });
                   }
                }}
             />
+            <View style={{ marginTop: 10 }}>
+               <Button
+                  color="#F23826"
+                  title="Cancel"
+                  onPress={() => {
+                     setVal();
+                  }}
+               />
+            </View>
          </View>
       </ScrollView>
    );

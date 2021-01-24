@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Button, StyleSheet, Text, View } from "react-native";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -11,6 +11,7 @@ import {
    HomepageNavigator,
    AddNewGoalNavigator,
    SessionsNavigator,
+   GoalsResponsibleNavigator,
 } from "./Navigators";
 import Login from "./Login";
 
@@ -44,7 +45,7 @@ const LoggedInPage = ({ userId }: props) => {
                      iconName = focused ? "add-circle" : "add-circle-outline";
                   } else if (route.name === "Data") {
                      iconName = focused ? "bar-chart" : "bar-chart-outline";
-                  } else if (route.name === "Buddies") {
+                  } else if (route.name === "GoalsResponsible") {
                      iconName = focused ? "people-sharp" : "people-outline";
                   }
 
@@ -80,10 +81,10 @@ const LoggedInPage = ({ userId }: props) => {
                }}
             />
             <Tab.Screen
-               name="Buddies"
-               component={Goal}
+               name="GoalsResponsible"
+               component={GoalsResponsibleNavigator}
                options={{
-                  title: "Buddies",
+                  title: "Goals Responsible",
                }}
             />
             <Tab.Screen
