@@ -8,15 +8,34 @@ import GoalDashboard from "./GoalDashboard";
 import Sessions from "./Sessions";
 import BuddyView from "./BuddyView";
 import GoalTimer from "./GoalTimer";
+import Login from "./Login";
+import LoggedInPage from "./LoggedInPage";
+import GoalsResponsible from "./components/GoalsResponsible";
 
 const Stack = createStackNavigator();
 
-const HomepageNavigator = () => {
+type homeProps = {
+   userId: string;
+};
+
+type sessionProps = {
+   userId: string;
+};
+
+type goalsResponsibleProps = {
+   userId: string;
+};
+
+type addNewGoalProps = {
+   userId: string;
+};
+
+const HomepageNavigator = ({ userId }: homeProps) => {
    return (
       <Stack.Navigator initialRouteName="Homepage">
          <Stack.Screen
             name="Homepage"
-            children={() => <Homepage userId="5ffa75516d1f8f0004a8f6f8" />}
+            children={() => <Homepage userId={userId} />}
             options={{
                headerTitle: "Accountability Buddy",
             }}
@@ -55,12 +74,23 @@ const HomepageNavigator = () => {
    );
 };
 
-const AddNewGoalNavigator = () => {
+const GoalsResponsibleNavigator = ({ userId }: goalsResponsibleProps) => {
+   return (
+      <Stack.Navigator>
+         <Stack.Screen
+            name="Goals Responsible"
+            children={() => <GoalsResponsible userId={userId} />}
+         />
+      </Stack.Navigator>
+   );
+};
+
+const AddNewGoalNavigator = ({ userId }: addNewGoalProps) => {
    return (
       <Stack.Navigator>
          <Stack.Screen
             name="Add New Goal"
-            component={Goal}
+            children={() => <GoalsResponsible userId={userId} />}
             options={{
                headerTitle: "Add Goal",
             }}
@@ -69,12 +99,33 @@ const AddNewGoalNavigator = () => {
    );
 };
 
-const SessionsNavigator = () => {
+// const LoginNavigator = () => {
+//    return (
+//       <Stack.Navigator initialRouteName="Login">
+//          {/* <Stack.Screen
+//             name="Login"
+//             children={() => <Login />}
+//             options={{
+//                headerShown: false,
+//             }}
+//          /> */}
+//          <Stack.Screen
+//             name="LoggedInPage"
+//             children={() => <LoggedInPage />}
+//             options={{
+//                headerTitle: "Accountability Buddy",
+//             }}
+//          />
+//       </Stack.Navigator>
+//    );
+// };
+
+const SessionsNavigator = ({ userId }: sessionProps) => {
    return (
       <Stack.Navigator>
          <Stack.Screen
             name="Sessions"
-            children={() => <Sessions userId="5ffa75516d1f8f0004a8f6f8" />}
+            children={() => <Sessions userId={userId} />}
             options={{
                headerTitle: "Unapproved Sessions",
             }}
@@ -83,4 +134,9 @@ const SessionsNavigator = () => {
    );
 };
 
-export { HomepageNavigator, AddNewGoalNavigator, SessionsNavigator };
+export {
+   HomepageNavigator,
+   AddNewGoalNavigator,
+   GoalsResponsibleNavigator,
+   SessionsNavigator,
+};

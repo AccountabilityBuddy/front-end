@@ -38,7 +38,6 @@ const HomepageHeader = () => {
    return (
       <View style={styles.header}>
          {/* <Text style={styles.text}>Accountability Buddy</Text> */}
-         <GoalsAchievedProgress progress={80} />
       </View>
    );
 };

@@ -11,8 +11,10 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { request, gql } from "graphql-request";
 import RootStackParamList from "./ParamList";
 import Name from "./components/Name";
+import InputDate from "./components/InputDate";
 import Buddy from "./components/Buddy";
 import NavBar from "./components/NavBar";
+import NameBuddy from "./components/NameBuddy";
 
 type ProfileScreenNavigationProp = StackNavigationProp<
    RootStackParamList,
@@ -22,57 +24,125 @@ type ProfileScreenNavigationProp = StackNavigationProp<
 // Add prop for creator
 
 type props = {
-   navigation: ProfileScreenNavigationProp;
+   userId: string;
+   setVal: Function;
 };
 
-const Goal = ({ navigation }: props) => {
+const goalAddedAlert = (
+   goalName: string,
+   setGoalName: React.Dispatch<React.SetStateAction<string>>,
+   setStartDate: React.Dispatch<React.SetStateAction<Date>>,
+   setEndDate: React.Dispatch<React.SetStateAction<Date>>,
+   setGoalPeriod: React.Dispatch<React.SetStateAction<string>>,
+   setGoalStake: React.Dispatch<React.SetStateAction<string>>,
+   setBuddy: React.Dispatch<React.SetStateAction<string>>
+) => {
+   Alert.alert(
+      "Goal Added",
+      `The goal ${goalName} has been added!`,
+      [
+         {
+            text: "Done",
+            onPress: () => {
+               setGoalName("");
+               setStartDate(new Date());
+               setEndDate(new Date());
+               setGoalPeriod("");
+               setGoalStake("");
+               setBuddy("");
+            },
+         },
+      ],
+      { cancelable: false }
+   );
+};
+
+const Goal = ({ userId, setVal }: props) => {
    const [goalName, setGoalName] = useState("");
-   const [startDate, setStartDate] = useState("");
-   const [endDate, setEndDate] = useState("");
+   const [startDate, setStartDate] = useState(new Date());
+   const [endDate, setEndDate] = useState(new Date());
    const [goalPeriod, setGoalPeriod] = useState("");
    const [goalStake, setGoalStake] = useState("");
    const [buddy, setBuddy] = useState("");
+
+   const _userId = userId.replace(/\s/g, "");
 
    return (
       <ScrollView>
          <View style={styles.container}>
             <Name title="Name" setVal={setGoalName} />
-            <Name title="Start Date" setVal={setStartDate} />
-            <Name title="End Date" setVal={setEndDate} />
+            <InputDate
+               title="Start Date"
+               date={startDate}
+               setVal={setStartDate}
+            />
+            <InputDate title="End Date" date={endDate} setVal={setEndDate} />
             <Name title="Period" setVal={setGoalPeriod} />
             <Name title="Stake" setVal={setGoalStake} />
-            <Name title="Buddy" setVal={setBuddy} />
+            <NameBuddy title="Buddy" setVal={setBuddy} />
             <Button
                title="Add Goal"
                onPress={() => {
                   // what's the difference between period and durationPerSession?
                   if (goalName !== "") {
-                     const query = gql`
-                        mutation {
-                           createGoal(
-                              goalInput: {
-                                 name: "${goalName}"
-                                 stake: "${goalStake}"
-                                 buddy: "5ffa75516d1f8f0004a8f6f8"
-                                 period: "${goalPeriod}"
-                                 creator: "5ffa75516d1f8f0004a8f6f8"
-                                 durationPerSession: "${goalPeriod}"
-                                 startDate: "2020-12-26T04:59:43.789Z"
-                                 endDate: "2021-12-26T04:59:43.789Z"
-                              }
-                           ) {
-                              name
-                           }
+                     const queryGetBuddyId = gql`
+                        query {
+                           getIdByEmail(
+                              userEmail: { email: "${buddy}" }
+                           )
                         }
                      `;
 
                      request(
                         "https://accountability-buddy-backend.herokuapp.com/graphql?",
-                        query
-                     ).then((data) => {});
+                        queryGetBuddyId
+                     ).then((data) => {
+                        const query = gql`
+                           mutation {
+                              createGoal(
+                                 goalInput: {
+                                    name: "${goalName}"
+                                    stake: "${goalStake}"
+                                    buddy: "${data["getIdByEmail"]}"
+                                    period: "${goalPeriod}"
+                                    creator: "${_userId}"
+                                    durationPerSession: "${goalPeriod}"
+                                    startDate: "${startDate}"
+                                    endDate: "${endDate}"
+                                 }
+                              ) {
+                                 name
+                              }
+                           }
+                        `;
+                        request(
+                           "https://accountability-buddy-backend.herokuapp.com/graphql?",
+                           query
+                        ).then((data) => {
+                           goalAddedAlert(
+                              goalName,
+                              setGoalName,
+                              setStartDate,
+                              setEndDate,
+                              setGoalPeriod,
+                              setGoalStake,
+                              setBuddy
+                           );
+                           setVal();
+                        });
+                     });
                   }
                }}
             />
+            <View style={{ marginTop: 10 }}>
+               <Button
+                  color="#F23826"
+                  title="Cancel"
+                  onPress={() => {
+                     setVal();
+                  }}
+               />
+            </View>
          </View>
       </ScrollView>
    );

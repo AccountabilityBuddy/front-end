@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView } from "react-native";
+import { Button, ScrollView, View, TouchableOpacity, Text } from "react-native";
 import { request, gql } from "graphql-request";
 import AppLoading from "expo-app-loading";
 import GoalCard from "./GoalCard";
+import Goal from "../AddNewGoal";
 
 type Props = {
    userId: string;
@@ -23,6 +24,7 @@ const GoalList = ({ userId }: Props) => {
       }>
    >([]);
    const [loading, setLoading] = useState(true);
+   const [refresh, setRefresh] = useState(false);
    let goalCardList: Array<JSX.Element> = [];
 
    useEffect(() => {
@@ -54,7 +56,8 @@ const GoalList = ({ userId }: Props) => {
          setFetchedData(data["users"][0]["createdGoals"]);
       });
       setLoading(false);
-   }, []);
+      console.log("HELLO");
+   }, [refresh]);
 
    if (loading) {
       return <AppLoading />;
@@ -81,7 +84,42 @@ const GoalList = ({ userId }: Props) => {
       );
    }
 
-   return <ScrollView>{goalCardList}</ScrollView>;
+   if (refresh) {
+      return <Goal userId={userId} setVal={() => setRefresh(!refresh)} />;
+   } else {
+      return (
+         <View style={{ flex: 1, marginBottom: 8 }}>
+            <ScrollView>{goalCardList}</ScrollView>
+            <View>
+               <TouchableOpacity
+                  onPress={() => {
+                     setRefresh(!refresh);
+                  }}
+               >
+                  <View
+                     style={{
+                        marginTop: 10,
+                        width: "100%",
+                        height: 30,
+                        backgroundColor: "#3FC2A3",
+                        borderRadius: 8,
+                     }}
+                  >
+                     <Text
+                        style={{
+                           marginTop: 5,
+                           textAlign: "center",
+                           color: "white",
+                        }}
+                     >
+                        Add New Goal
+                     </Text>
+                  </View>
+               </TouchableOpacity>
+            </View>
+         </View>
+      );
+   }
 };
 
 export default GoalList;
