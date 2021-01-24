@@ -24,6 +24,8 @@ type Props = {
    note: string;
    approved: boolean;
    image: string;
+   val: boolean;
+   setVal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const approveSession = (id: string) => {
@@ -63,6 +65,8 @@ const GoalsResponsibleCard = ({
    goalName,
    note,
    approved,
+   val,
+   setVal,
 }: Props) => {
    const navigation = useNavigation();
 
@@ -106,6 +110,7 @@ const GoalsResponsibleCard = ({
                   }}
                   onPress={() => {
                      approveSession(id);
+                     setVal(!val);
                   }}
                >
                   <Text

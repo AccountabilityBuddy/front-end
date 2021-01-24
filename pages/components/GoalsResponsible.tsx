@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, ScrollView, Alert } from "react-native";
 import { request, gql } from "graphql-request";
 import GoalsResponsibleCard from "./GoalsResponsibleCard";
-import { useFocusEffect } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 
 type props = {
    userId: string;
@@ -34,8 +34,10 @@ type goalsResponsible = {
 
 const GoalsResponsible = ({ userId }: props) => {
    const [fetchedData, setFetchedData] = useState<Array<fetchedData>>([]);
+   const [didApprove, setDidApprove] = useState(false);
    let goalsResponsibleCardList: Array<JSX.Element> = [];
-   useFocusEffect(() => {
+   const isFocused = useIsFocused();
+   useEffect(() => {
       console.log(userId);
       const userIdNoSpace = userId.replace(/\s/g, "");
       const query = gql`
@@ -78,7 +80,7 @@ const GoalsResponsible = ({ userId }: props) => {
          );
          setFetchedData(unapprovedGoalsResponsible);
       });
-   });
+   }, [isFocused, didApprove]);
 
    for (var i = 0; i < fetchedData.length; i++) {
       let goalName = fetchedData[i]["name"];
@@ -99,6 +101,8 @@ const GoalsResponsible = ({ userId }: props) => {
                note={note}
                approved={approved}
                image={image}
+               val={didApprove}
+               setVal={setDidApprove}
             />
          );
       }

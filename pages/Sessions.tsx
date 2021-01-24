@@ -4,7 +4,7 @@ import { request, gql } from "graphql-request";
 import { StackNavigationProp } from "@react-navigation/stack";
 import RootStackParamList from "./ParamList";
 import SessionCard from "./components/SessionCard";
-import { useFocusEffect } from "@react-navigation/native";
+import { useIsFocused } from "@react-navigation/native";
 
 type ProfileScreenNavigationProp = StackNavigationProp<
    RootStackParamList,
@@ -30,7 +30,8 @@ type createdGoal = {
 const Sessions = ({ userId }: prop) => {
    const [fetchedData, setFetchedData] = useState<Array<createdGoal>>([]);
    let sessionCardList: Array<JSX.Element> = [];
-   useFocusEffect(() => {
+   const isFocused = useIsFocused();
+   useEffect(() => {
       const query = gql`
          query {
             users(id: "${userId}") {
@@ -75,7 +76,7 @@ const Sessions = ({ userId }: prop) => {
          setFetchedData(unapprovedSessions);
       });
       console.log("IN FOCUS");
-   });
+   }, [isFocused]);
 
    for (var i = 0; i < fetchedData.length; i++) {
       let name = fetchedData[i]["name"];
