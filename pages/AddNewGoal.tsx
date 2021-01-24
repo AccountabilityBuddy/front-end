@@ -11,6 +11,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { request, gql } from "graphql-request";
 import RootStackParamList from "./ParamList";
 import Name from "./components/Name";
+import InputDate from "./components/InputDate";
 import Buddy from "./components/Buddy";
 import NavBar from "./components/NavBar";
 
@@ -28,8 +29,8 @@ type props = {
 const goalAddedAlert = (
    goalName: string,
    setGoalName: React.Dispatch<React.SetStateAction<string>>,
-   setStartDate: React.Dispatch<React.SetStateAction<string>>,
-   setEndDate: React.Dispatch<React.SetStateAction<string>>,
+   setStartDate: React.Dispatch<React.SetStateAction<Date>>,
+   setEndDate: React.Dispatch<React.SetStateAction<Date>>,
    setGoalPeriod: React.Dispatch<React.SetStateAction<string>>,
    setGoalStake: React.Dispatch<React.SetStateAction<string>>,
    setBuddy: React.Dispatch<React.SetStateAction<string>>
@@ -42,8 +43,8 @@ const goalAddedAlert = (
             text: "Done",
             onPress: () => {
                setGoalName("");
-               setStartDate("");
-               setEndDate("");
+               setStartDate(new Date());
+               setEndDate(new Date());
                setGoalPeriod("");
                setGoalStake("");
                setBuddy("");
@@ -56,8 +57,8 @@ const goalAddedAlert = (
 
 const Goal = ({ userId }: props) => {
    const [goalName, setGoalName] = useState("");
-   const [startDate, setStartDate] = useState("");
-   const [endDate, setEndDate] = useState("");
+   const [startDate, setStartDate] = useState(new Date());
+   const [endDate, setEndDate] = useState(new Date());
    const [goalPeriod, setGoalPeriod] = useState("");
    const [goalStake, setGoalStake] = useState("");
    const [buddy, setBuddy] = useState("");
@@ -68,8 +69,12 @@ const Goal = ({ userId }: props) => {
       <ScrollView>
          <View style={styles.container}>
             <Name title="Name" setVal={setGoalName} />
-            <Name title="Start Date" setVal={setStartDate} />
-            <Name title="End Date" setVal={setEndDate} />
+            <InputDate
+               title="Start Date"
+               date={startDate}
+               setVal={setStartDate}
+            />
+            <InputDate title="End Date" date={endDate} setVal={setEndDate} />
             <Name title="Period" setVal={setGoalPeriod} />
             <Name title="Stake" setVal={setGoalStake} />
             <Name title="Buddy" setVal={setBuddy} />
