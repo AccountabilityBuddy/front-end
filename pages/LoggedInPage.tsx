@@ -82,7 +82,7 @@ const LoggedInPage = ({ userId }: props) => {
             />
             <Tab.Screen
                name="GoalsResponsible"
-               component={GoalsResponsibleNavigator}
+               children={() => <GoalsResponsibleNavigator userId={userId} />}
                options={{
                   title: "Goals Responsible",
                }}
