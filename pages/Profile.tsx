@@ -31,7 +31,7 @@ const alertAndLogout = (
          },
          {
             text: "No",
-            onPress: () => console.log("logout cancelled"),
+            onPress: () => {},
          },
       ],
       { cancelable: false }
@@ -47,7 +47,6 @@ const Profile = ({ userId, setLoggedIn }: props) => {
    });
    const isFocused = useIsFocused();
    useEffect(() => {
-      console.log(userId);
       const userIdNoSpace = userId.replace(/\s/g, "");
       const query = gql`
          query {
@@ -66,7 +65,6 @@ const Profile = ({ userId, setLoggedIn }: props) => {
       ).then((data) => {
          setFetchedData(data["users"][0]);
       });
-      console.log("test");
    }, [isFocused]);
 
    return (

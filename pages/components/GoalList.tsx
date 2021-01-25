@@ -56,12 +56,7 @@ const GoalList = ({ userId }: Props) => {
          setFetchedData(data["users"][0]["createdGoals"]);
       });
       setLoading(false);
-      console.log("HELLO");
    }, [refresh]);
-
-   if (loading) {
-      return <AppLoading />;
-   }
 
    for (var i = 0; i < fetchedData.length; i++) {
       goalCardList.push(
@@ -85,7 +80,11 @@ const GoalList = ({ userId }: Props) => {
    }
 
    if (refresh) {
-      return <Goal userId={userId} setVal={() => setRefresh(!refresh)} />;
+      return (
+         <View>
+            <Goal userId={userId} setVal={() => setRefresh(!refresh)} />
+         </View>
+      );
    } else {
       return (
          <View style={{ flex: 1, marginBottom: 8 }}>

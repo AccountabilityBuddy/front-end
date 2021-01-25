@@ -75,7 +75,6 @@ const Sessions = ({ userId }: prop) => {
          });
          setFetchedData(unapprovedSessions);
       });
-      console.log("IN FOCUS");
    }, [isFocused]);
 
    for (var i = 0; i < fetchedData.length; i++) {
