@@ -25,7 +25,6 @@ const GoalCalendar = (sessions: props) => {
          formatDate(timestamp.toDate(parseInt(unixDate.slice(0, -3))))
       )
    );
-   console.log(sessionDates);
    let markedDatesObj: { [k: string]: any } = {};
    sessionDates.forEach((dateString: string) => {
       markedDatesObj[dateString] = {
@@ -35,7 +34,6 @@ const GoalCalendar = (sessions: props) => {
          textColor: "white",
       };
    });
-   console.log(markedDatesObj);
    return (
       <View>
          <Calendar

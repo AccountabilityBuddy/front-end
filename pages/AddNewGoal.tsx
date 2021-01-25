@@ -43,14 +43,7 @@ const goalAddedAlert = (
       [
          {
             text: "Done",
-            onPress: () => {
-               setGoalName("");
-               setStartDate(new Date());
-               setEndDate(new Date());
-               setGoalPeriod("");
-               setGoalStake("");
-               setBuddy("");
-            },
+            onPress: () => {},
          },
       ],
       { cancelable: false }

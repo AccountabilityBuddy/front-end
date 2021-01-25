@@ -89,7 +89,7 @@ const BuddyView = ({ navigation, route }: Props) => {
          [
             {
                text: "OK",
-               onPress: () => console.log("session sent"),
+               onPress: () => {},
             },
          ],
          { cancelable: false }

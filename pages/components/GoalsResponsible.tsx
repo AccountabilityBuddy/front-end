@@ -38,7 +38,6 @@ const GoalsResponsible = ({ userId }: props) => {
    let goalsResponsibleCardList: Array<JSX.Element> = [];
    const isFocused = useIsFocused();
    useEffect(() => {
-      console.log(userId);
       const userIdNoSpace = userId.replace(/\s/g, "");
       const query = gql`
          query {

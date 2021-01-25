@@ -41,9 +41,7 @@ const approveSession = (id: string) => {
    request(
       "https://accountability-buddy-backend.azurewebsites.net/graphql",
       query
-   ).then((data) => {
-      console.log(data);
-   });
+   ).then((data) => {});
 
    Alert.alert(
       "This session has been approved",
@@ -51,7 +49,7 @@ const approveSession = (id: string) => {
       [
          {
             text: "OK",
-            onPress: () => console.log("session approved"),
+            onPress: () => {},
          },
       ],
       { cancelable: false }

@@ -17,7 +17,7 @@ const loginFailedAlert = () => {
       [
          {
             text: "Try Again",
-            onPress: () => console.log("Trying again"),
+            onPress: () => {},
          },
       ],
       { cancelable: false }
@@ -60,7 +60,6 @@ const checkAndSignup = (
    )
       .then((data) => {
          if (data["createUser"]["_id"]) {
-            console.log(data["createUser"]["_id"]);
             setUserId(data["createUser"]["_id"]);
             loggedin(true);
          } else {
@@ -96,7 +95,6 @@ const checkAndLogin = (
       query
    )
       .then((data) => {
-         console.log(data["checkPassword"]["_id"]);
          if (data["checkPassword"]["_id"]) {
             setUserId(data["checkPassword"]["_id"]);
             loggedin(true);
